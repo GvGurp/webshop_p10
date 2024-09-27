@@ -7,33 +7,7 @@ use App\Http\Controllers\AccountController;
 
 
 
-Route::post('/products', function (Request $request) {
-
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'price' => 'required|numeric|min:5',
-    ]);
-
-    return back()->with('success', 'Product saved successfully!');
-});
-
-Route::get('/products', function () {
-
-    $products = App\Models\Product::all(); 
-
-    return view( 'products.index', compact('products'));
-});
-
-
-Route::get('/products/create', function () {
-
-    return view( 'products.create');
-});
-
-Route::get('/Product/{product}', function (Product $product){
-    return view('products.show', compact('product'));
-});
-//........................//
+   
 
 Route::get('/', function () {
     return view('home');
