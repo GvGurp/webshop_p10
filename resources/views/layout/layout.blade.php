@@ -13,19 +13,22 @@
     </div>
     <div id="logoptions">
         <ul>
-            <li class="redc"> <a href="home.html">Home</a> </li>
-            <li class="bluec"> <a href="OverOns.html">Over ons </a></li>
-            <li class="redc"> <a href="service.html">Service </a></li>
-            <li class="bluec" > <a href="zakelijk.html">Zakelijk </a></li>
-            <li class="redc"> <a href="faq.html">Faq </a> </li>
-            <li class="bluec"><a href="Bezorgdiensten.html"> Bezorgdiensten </a></li>
-            <li class="redc"> <a href="account.php">Account </a> </li>
+            <li class="redc"> <a href="home">Home</a> </li>
+            <li class="bluec"> <a href="overons">Over ons </a></li>
+            <li class="redc"> <a href="service">Service </a></li>
+            <li class="bluec" > <a href="zakelijk">Zakelijk </a></li>
+            <li class="redc"> <a href="faq">Faq </a> </li>
+            <li class="bluec"><a href="bezorgdiensten"> Bezorgdiensten </a></li>
+            <li class="redc"> <a href="account">Account </a> </li>
+             <!-- pagina's staan in mapje webshop (Gaby) -->
+            <li class="bluec"><a href="webshop/webshop"> webshop  </a> </li>
+            <li class="redc"> <a href="webshop/admincreate">admin create </a> </li>
         </ul>
     </div>
 </nav>
-
-    <div class="">
-        @yield ('section')
+    <!-- Inhoud dat op de pagina komt te staan (Gaby) -->
+    <div class=""> 
+        @yield ('content')
     </div>
 
 <footer id="footer">

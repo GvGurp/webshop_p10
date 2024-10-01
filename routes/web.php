@@ -7,7 +7,7 @@ use App\Http\Controllers\AccountController;
 
 
 
-
+// De routes die de pagina verbinden via de navigatie 
 
 Route::get('/', function () {
     return view('home');
@@ -43,7 +43,7 @@ Route::get('/loginorsignup', function () {
 })->name('loginorsignup');
 
 
-Route::get('/overOns', function () {
+Route::get('/overons', function () {
     return view('overOns');
 })->name('overOns');
 
@@ -57,10 +57,26 @@ Route::get('/service', function () {
     return view('service');
 })->name('service');
 
+Route::get('/account', function () {
+    return view('account');
+})->name('account');
 
 Route::get('/zakelijk', function () {
     return view('zakelijk');
 })->name('zakelijk');
+
+// routes voor pagina's in mapje webshop (Gaby)
+Route::get('/webshop/webshop', function () {
+    return view('webshop/webshop');
+})->name('webshop/webshop');
+
+Route::get('/webshop/admincreate', function () {
+    return view('webshop/adminCreate');
+})->name('webshop/adminCreate');
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::post('/login', function (Request $request) {
     if (!$request->has(['Naam', 'password', 'email'])) {
