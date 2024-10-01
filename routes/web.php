@@ -7,7 +7,7 @@ use App\Http\Controllers\AccountController;
 
 
 
-   
+
 
 Route::get('/', function () {
     return view('home');
@@ -140,3 +140,5 @@ Route::get('/logout', function () {
     Session::flush();
     return redirect()->route('loginorsignup');
 })->name('logout');
+
+/////////////////////////////////////////////////////CRUD///////////////////////////////////////////////////////////////////
