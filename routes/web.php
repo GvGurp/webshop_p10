@@ -7,8 +7,6 @@ use App\Http\Controllers\AccountController;
 
 
 
-// De routes die de pagina verbinden via de navigatie 
-
 Route::get('/', function () {
     return view('home');
 })->name('home');
@@ -26,6 +24,11 @@ Route::get('/bestellen', function () {
 Route::get('/bezorgdiensten', function () {
     return view('bezorgdiensten');
 })->name('bezorgdiensten');
+
+
+Route::get('/verzoeken', function () {
+    return view('verzoeken');
+})->name('verzoeken');
 
 
 Route::get('/faq', function () {
