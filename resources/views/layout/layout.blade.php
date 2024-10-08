@@ -25,7 +25,7 @@
             <li class="redc"> <a href="webshop/admincreate">admin create </a> </li>
             <!--auth inloggen en registratie (Ola) -->
             <li class="bluec"><a href="{{ url('/login') }}"> Inloggen </a></li>
-            <li class="redc"><a href="resources/views/auth/register.blade.php"> Registreren </a></li>
+            <li class="redc"><a href="{{ url('/register') }}"> Registreren </a></li>
         </ul>
     </div>
 </nav>
