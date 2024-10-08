@@ -22,8 +22,11 @@
             <li class="redc"><a href="bezorgdiensten"> Bezorgdiensten </a></li>
             <li class="bluec"> <a href="account">Account </a> </li>
              <!-- pagina's staan in mapje webshop (Gaby) -->
-            <li class="redc"><a href="webshop/webshop"> webshop  </a> </li>
-            <li class="bluec"> <a href="webshop/admincreate">admin create </a> </li>
+            <li class="bluec"><a href="webshop/webshop"> webshop  </a> </li>
+            <li class="redc"> <a href="webshop/admincreate">admin create </a> </li>
+            <!--auth inloggen en registratie (Ola) -->
+            <li class="bluec"><a href="{{ url('/login') }}"> Inloggen </a></li>
+            <li class="redc"><a href="{{ url('/register') }}"> Registreren </a></li>
         </ul>
     </div>
 </nav>
