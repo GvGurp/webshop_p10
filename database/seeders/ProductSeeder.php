@@ -21,10 +21,10 @@ class ProductSeeder extends Seeder
             for ($i = 0; $i < 25; $i++) {
                 Product::create([
                     'name' => ucfirst($category->name) . ' ' . ($i + 1),  // Bijvoorbeeld laptop 1 (Gaby)
-                    'picture' => $faker->imageUrl(640, 480, 'tech', true),  // Een willekeurige tech-afbeelding (Gaby)
+                    'image' => $faker->imageUrl(640, 480, 'tech', true),  // Een willekeurige tech-afbeelding (Gaby)
                     'specifications' => $faker->sentence,  // Een korte specificatie zoals 'Battery life: 10h (Gaby)
                     'price' => $faker->randomFloat(2, 100, 2000),  // Een willekeurige prijs tussen 100 en 2000 euro met decimalen (Gaby)
-                    'product_information' => $faker->paragraph,  // Een korte productbeschrijving (Gaby)
+                    'productInformation' => $faker->paragraph,  // Een korte productbeschrijving (Gaby)
                     'category_id' => $category->id  // Koppel het product aan een van de 4 categorieËn (Gaby)
                 ]);
             }
