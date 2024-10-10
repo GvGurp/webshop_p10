@@ -5,13 +5,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CartController;
 
 
-// De routes die de pagina verbinden via de navigatie
 
 ////////////////////////////De routes die de pagina verbinden via de navigatie 
-////////////////////////////De routes die de pagina verbinden via de navigatie
+
 
 Route::get('/', function () {
    return view('home');
@@ -90,15 +88,15 @@ Route::get('/webshop/admincreate', function () {
 
 Route::get('webshop', function () {
     $products = \App\Models\product::all();
-    return view('webshop/webshop', compact('product'));
+    return view('webshop/webshop', compact('products'));
 });
 
 ////////////////////////////////////////////////////AUTH////////////////////////////////////////////////////////////////////
 Auth::routes();
 
 //create
-Route::post('webshop', function () {
-    \App\Models\product::create([
+Route::post('webshop', function () { 
+  \App\Models\product::create([
         'name' => request('name'),
         'price' => request('price'),
         'product_id' => 1
@@ -109,14 +107,18 @@ Route::post('webshop', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /////////////////////////////////////////////////CART/////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////AUTH////////////////////////////////////////////////////////////////////
-Auth::routes();
-
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show');
+
+Route::get('/webshop/webshop', function () {
+    return view('webshop/webshop');
+})->name('webshop.webshop');
+
 
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+////////////////////////////////////////////////////AUTH////////////////////////////////////////////////////////////////////
+Auth::routes();
+

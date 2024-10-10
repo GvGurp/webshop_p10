@@ -37,7 +37,8 @@
 
         <h3>Totaal: €{{ number_format($totalPrice, 2) }}</h3> <!-- de totale prijs laten zien met maar twee dicimalen (Gaby)--> 
         <a href="{{ route('cart.checkout') }}" class="btn btn-primary">Afrekenen</a> <!--naar de chechout kunnen gaan (Gaby) -->
-      @else
+        <a class="btn btn-primary"> <a href="webshop/webshop">Verder winkelen </a> <!--Terug naar webshop pagina (Gaby) Werk nog niet -->
+
       <!-- Als er niks in je winkelmandje staat komt deze tekst (Gaby) -->
         <p>Je winkelmandje is leeg.</p>
     @endif

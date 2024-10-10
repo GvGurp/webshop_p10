@@ -1,42 +1,57 @@
+
+
 @extends('layout.layout')
 
 
-@section('content')
-<h1> Webshop</h1>
-
-
-
-    <h1>{{ $product->name }}</h1>  <!--Producten kunnen toevoegen aan winkelmandje (Gaby) --> 
-    <p>Prijs: €{{ number_format($product->price, 2) }}</p>
-
-    <form action="{{ route('cart.add', $product->id) }}" method="POST">
-        @csrf
-        <button type="submit" class="btn btn-primary">Toevoegen aan winkelmandje</button>
-    </form>
-
-
-@endsections
-@extends('layout.layout')
-
 
 @section('content')
-    <h1> Webshop</h1>
-
-    <form action="{{ url('/webshop') }}" method="POST">
-        @csrf
-        <input type="text" name="name" placeholder="Productnaam">
-        <input type="text" name="price" placeholder="Prijs">
-        <button type="submit">Toevoegen</button>
-    </form>
 
 
 
 
+<div class="webshop"> 
+<div class="titel"> <h1> Webshop</h1> </div>
+<ul class="producten">
+    @foreach($products as $product)
+        <li>
+            <!-- Laat de product naam zien in hoofdletter en prijs (Gaby) -->
+            <strong>{{ $product->name }}</strong> 
+            <!-- De prijs --> 
+             <br> 
+            <strong> Prijs</strong> €{{ $product->price }} 
+            
+          
+        
+             <!-- Laat product information zien -->
+            <p><strong>Information:</strong> {{ $product->productInformation }}</p>
 
-    ///crud-show (tishanty)///
-    <ul>
-        @foreach($products as $product)
-            <li>{{$product->name}} -{{$product->price}}</li>
-        @endforeach
-    </ul>
-@endsection
+            
+
+            <!-- Laat de specications zien (Gaby) -->
+            <p><strong>Specifications:</strong> {{ $product->specifications }}</p>
+            
+           
+
+              <!-- Laat afbeedling van product zien / Als die er is/ (Gaby)-->
+              @if($product->picture)
+                <img src="{{ asset('storage/' . $product->picture) }}" alt="{{ $product->name }}" style="max-width: 100px;">
+            @else
+                <p>Geen afbeelding </p>
+            @endif
+           
+
+            <!-- Voeg de product aan winkelmandhe (Gaby)-->
+            <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-primary">Toevoegen aan winkelmandje</button>  
+            </form>
+        </li>
+        <hr>
+    @endforeach
+</ul>
+
+    </div>
+</div> 
+    
+   
+

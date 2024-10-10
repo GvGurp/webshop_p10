@@ -1,0 +1,21 @@
+.webshop{
+    display: flex;
+   justify-content: right;
+   align-items: center;
+   max-width: 100%;
+   
+
+}
+
+.producten {
+    display: block;
+    list-style-type: none;
+    color: black; 
+   
+}
+
+.titel {
+    display: block;
+    font-size: 50px;
+    font-weight: bold;
+}
