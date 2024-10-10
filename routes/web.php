@@ -86,17 +86,14 @@ Route::get('/webshop/admincreate', function () {
 /// show (Tishanty)///
 
 Route::get('webshop', function () {
-    $products = \App\Models\products::all();
-    return view('webshop/webshop', compact('products'));
+    $products = \App\Models\product::all();
+    return view('webshop/webshop', compact('product'));
 });
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 //create
 Route::post('webshop', function () {
-    \App\Models\products::create([
+    \App\Models\product::create([
         'name' => request('name'),
         'price' => request('price'),
         'product_id' => 1
@@ -104,7 +101,7 @@ Route::post('webshop', function () {
     return redirect('/');
 });
 
-<<<<<<< Updated upstream
+
 
 ////////////////////////////////////////////////////AUTH////////////////////////////////////////////////////////////////////
 Auth::routes();
@@ -120,5 +117,3 @@ Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.a
 Route::post('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
-=======
->>>>>>> Stashed changes
