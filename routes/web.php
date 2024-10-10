@@ -5,10 +5,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 
+// De routes die de pagina verbinden via de navigatie
 
 ////////////////////////////De routes die de pagina verbinden via de navigatie 
+////////////////////////////De routes die de pagina verbinden via de navigatie
 
 Route::get('/', function () {
    return view('home');
@@ -83,16 +86,32 @@ Route::get('/webshop/admincreate', function () {
 /////////////////////////////////////////////////////CRUD///////////////////////////////////////////////////////////////////
 
 
+/// show (Tishanty)///
 
+Route::get('webshop', function () {
+    $products = \App\Models\product::all();
+    return view('webshop/webshop', compact('product'));
+});
 
 ////////////////////////////////////////////////////AUTH////////////////////////////////////////////////////////////////////
 Auth::routes();
 
+//create
+Route::post('webshop', function () {
+    \App\Models\product::create([
+        'name' => request('name'),
+        'price' => request('price'),
+        'product_id' => 1
+    ]);
+    return redirect('/');
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /////////////////////////////////////////////////CART/////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////AUTH////////////////////////////////////////////////////////////////////
+Auth::routes();
 
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show');
 
