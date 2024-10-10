@@ -90,9 +90,12 @@ Route::get('webshop', function () {
     return view('webshop/webshop', compact('products'));
 });
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 //create
-Route::post('/webshop', function () {
+Route::post('webshop', function () {
     \App\Models\products::create([
         'name' => request('name'),
         'price' => request('price'),
@@ -101,6 +104,7 @@ Route::post('/webshop', function () {
     return redirect('/');
 });
 
+<<<<<<< Updated upstream
 
 ////////////////////////////////////////////////////AUTH////////////////////////////////////////////////////////////////////
 Auth::routes();
@@ -116,3 +120,5 @@ Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.a
 Route::post('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
+=======
+>>>>>>> Stashed changes
