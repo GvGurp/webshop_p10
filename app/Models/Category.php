@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+   protected $table = 'category';
+   public $timestamps = false;  // Geen timestamps in deze tabel
 
-    // Specify the attributes that can be mass assigned
     protected $fillable = [
         'name',
     ];
 
-    // Define the relationship with the Product model
+    // Relatie van catergory op products
     public function products()
     {
         return $this->hasMany(Product::class);

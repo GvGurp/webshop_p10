@@ -10,7 +10,8 @@ class Product extends Model
     use HasFactory;
 
     // Tabel naam (Gaby)
-    protected $table = 'products'; 
+
+    protected $table = 'product';  
 
     // Inhoud tabel products (Gaby)
     protected $fillable = [
@@ -23,7 +24,7 @@ class Product extends Model
 
     ];
 
-    // Define the relationship with the Category model
+    //Relatie van product op catergory (Gaby)
     public function category()
     {
         return $this->belongsTo(Category::class);
