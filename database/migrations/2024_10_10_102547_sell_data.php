@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('sell_data', function (Blueprint $table) {
             $table->id(); 
-            $table->date('sellData');
+            $table->date('sell_data');
             $table->unsignedBigInteger('products_id');
             $table->unsignedBigInteger('users_id');
+        });
     }
 
     /**
