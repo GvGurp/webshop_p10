@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('category', function (Blueprint $table){
-
             $table->id(); 
-            $table->string('name');
-           
-    
-
-        });
+            $table->date('sellData');
+            $table->unsignedBigInteger('products_id');
+            $table->unsignedBigInteger('users_id');
     }
 
     /**
@@ -26,7 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::drop('category');
-
+        Schema::drop('sell_data');
     }
 };

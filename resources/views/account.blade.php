@@ -8,7 +8,7 @@
 <body>
 <nav id="navbar">
     <div id="logonav">
-        <img src="{{ asset('Photos/cropped-logo%20UNEED-IT.png') }}">
+        <img src="{{ asset('foto\'s/cropped-logo%20UNEED-IT.png') }}" alt="Afbeelding van loge UNEED-IT">
     </div>
     <div id="logoptions">
         <ul>
