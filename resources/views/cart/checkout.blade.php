@@ -17,7 +17,7 @@
                     <tr>
                         <td>{{ $details['name'] }}</td>
                         <td>€{{ number_format($details['price'], 2) }}</td>
-                        <td>{{ $details['quantity'] }}</td>
+                        <td>{{ $details['total'] }}</td>
                     </tr>
                 @endforeach
             </tbody>

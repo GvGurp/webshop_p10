@@ -4,6 +4,7 @@ use App\Models\Product;
 use Illuminate\Http\Request; 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
 
 
 
@@ -92,6 +93,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 /////////////////////////////////////////////////CART/////////////////////////////////////////////////////////
 
+
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show');
 
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
