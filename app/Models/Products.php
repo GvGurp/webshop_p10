@@ -10,14 +10,14 @@ class Products extends Model
     use HasFactory;
 
     // Tabel naam (Gaby)
-    protected $table = 'products'; 
+    protected $table = 'products';
 
     // Inhoud tabel products (Gaby)
     protected $fillable = [
         'name',
         'picture',
         'specifications',
-        'prize',
+        'price',
         'productInformation',
 
 

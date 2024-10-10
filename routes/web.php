@@ -7,7 +7,7 @@ use App\Http\Controllers\AccountController;
 
 
 
-// De routes die de pagina verbinden via de navigatie 
+// De routes die de pagina verbinden via de navigatie
 
 Route::get('/', function () {
     return view('home');
@@ -158,3 +158,24 @@ Route::get('/logout', function () {
 })->name('logout');
 
 /////////////////////////////////////////////////////CRUD///////////////////////////////////////////////////////////////////
+
+/// show (Tishanty)///
+
+Route::get('/webshop', function () {
+    $products = \App\Models\products::all();
+    return view('webshop', compact('products'));
+});
+//get//
+Route::get('/webshop', function () {
+    $products = \App\Models\products::all();
+    return view('webshop', compact('products'));
+});
+//create
+Route::post('/webshop', function () {
+    \App\Models\products::create([
+        'name'=> request('name'),
+        'price'=>request('price'),
+        'product_id'=> 1
+    ]);
+    return redirect('/');
+});
