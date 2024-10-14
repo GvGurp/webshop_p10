@@ -16,7 +16,7 @@ class ProductSeeder extends Seeder
         $categories = Category::all();
 
         foreach ($categories as $category) {
-            for ($i = 0; $i < 100; $i++) {
+            for ($i = 0; $i < 5; $i++) {
                 Product::create([
                     'name' => ucfirst($category->name) . ' ' . ($i + 1),  // Bijvoorbeeld laptop 1 (Gaby)
                     'picture' => $faker->imageUrl(640, 480, 'tech', true),  // Een willekeurige tech-afbeelding (Gaby)

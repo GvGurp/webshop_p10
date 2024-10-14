@@ -1,10 +1,9 @@
 <?php
 
-use App\Models\Product; 
-use Illuminate\Http\Request; 
+
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\ProductController;
 
 
 
@@ -116,6 +115,9 @@ Route::get('/webshop/webshop', function () {
     return view('webshop/webshop');
 })->name('webshop.webshop');
 
+
+// Route voor het tonen van de webshop (met filters)
+Route::get('/cart/webshop', [ProductController::class, 'index'])->name('cart.webshop');
 
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');

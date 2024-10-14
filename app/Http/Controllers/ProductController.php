@@ -1,27 +1,32 @@
-<?php
-
+<?php 
 namespace App\Http\Controllers;
 
-
-use App\Models\Product; // Ensure this line is correct
-use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\Category; 
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function show($id)
+    public function index(Request $request)
     {
-        // Fetch the product from the database using the provided ID
-        $product = Product::find($id);
+        $query = Product::query();
 
-      
-        // Return the view with the product variable
-        return view('webshop.webShop', compact('product'));
+        // Filteren op categorie
+        if ($request->has('category') && !empty($request->category)) {
+            $query->whereIn('category_id', $request->category); 
+        }
+
+        // Filteren op max prijs
+        if ($request->has('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
+
+        // Haal de gefilterde producten op
+        $products = $query->with('category')->get(); // Met category om de naam op te halen
+
+        // Haal ook de categorieën om in de view te gebruiken
+        $categories = category::all(); // Zorg dat je deze regel hebt
+
+        return view('webshop.webshop', compact('products', 'categories')); // Zorg ervoor dat je $categories hier doorgeeft
     }
-
-    public function index(){
-        $products = product::all();
-        return view('/webshop', compact('products'));
-    }
-}
-
+}; 

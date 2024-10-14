@@ -19,3 +19,54 @@
     font-size: 50px;
     font-weight: bold;
 }
+
+
+
+
+
+
+/* Voeg dit toe aan je CSS-bestand (bijv. in een apart .css bestand of inline) */
+.filter-container {
+    float: left;
+    width: 25%;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+.product-list {
+    float: right;
+    width: 70%;
+    padding: 10px;
+}
+
+.filter-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-item {
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+ul.producten {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.producten li {
+    margin-bottom: 20px;
+}
+
+ul.producten img {
+    max-width: 100px;
+    height: auto;
+}
