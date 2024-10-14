@@ -94,6 +94,9 @@ Route::get('webshop', function () {
 ////////////////////////////////////////////////////AUTH////////////////////////////////////////////////////////////////////
 Auth::routes();
 
+Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create')->middleware('auth');
+
+
 //create
 Route::post('webshop', function () { 
   \App\Models\product::create([
