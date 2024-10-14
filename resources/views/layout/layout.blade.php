@@ -25,8 +25,26 @@
             <li class="bluec"><a href="webshop"> webshop  </a> </li>
             <li class="redc"> <a href="webshop/admincreate">admin create </a> </li>
             <!--auth inloggen en registratie (Ola) -->
-            <li class="bluec"><a href="{{ url('/login') }}"> Inloggen </a></li>
-            <li class="redc"><a href="{{ url('/register') }}"> Registreren </a></li>
+             <!-- Auth Links - Alleen tonen als gebruiker NIET is ingelogd(Ola) -->
+            @guest
+                <li class="bluec"><a href="{{ route('login') }}">Inloggen</a></li>
+                <li class="redc"><a href="{{ route('register') }}">Registreren</a></li>
+            @endguest
+
+            <!-- Logout knop - Alleen tonen als gebruiker IS ingelogd (Ola)-->
+            @auth
+                <li class="bluec">
+                    <a href="{{ route('logout') }}" 
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Uitloggen
+                    </a>
+                </li>
+                <!-- Formulier voor het uitloggen -->
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            @endauth
+
         </ul>
     </div>
 </nav>
