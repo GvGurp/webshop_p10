@@ -94,7 +94,7 @@ Route::get('webshop', function () {
 ////////////////////////////////////////////////////AUTH////////////////////////////////////////////////////////////////////
 Auth::routes();
 
-Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create')->middleware('auth');
+Route::get('/admin/create', [AdminController::class, 'create'])->name('adminCreate')->middleware('auth');
 
 
 //create
