@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\ProductController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 
@@ -86,14 +87,15 @@ Route::get('/webshop/admincreate', function () {
 /// show (Tishanty)///
 
 Route::get('webshop', function () {
+    $categories = Category::all();
     $products = \App\Models\product::all();
-    return view('webshop/webshop', compact('products'));
+    return view('webshop/webshop', compact('products', 'categories'));
 });
 
 ////////////////////////////////////////////////////AUTH////////////////////////////////////////////////////////////////////
 Auth::routes();
 
-Route::get('/admin/create', [AdminController::class, 'create'])->name('adminCreate')->middleware('auth');
+//Route::get('/admin/create', [AdminController::class, 'create'])->name('adminCreate')->middleware('auth');
 
 
 //create
@@ -111,7 +113,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 /////////////////////////////////////////////////CART/////////////////////////////////////////////////////////
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show');
 
-Route::get('/webshop/webshop', function () {
+Route::get('/webshop/webshop', function (): Factory|View {
     return view('webshop/webshop');
 })->name('webshop.webshop');
 
