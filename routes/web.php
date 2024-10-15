@@ -107,7 +107,7 @@ Route::post('adminCreate', function () {
         'specifications' => request('specifications'),
         'category_id' => 1,
     ]);
-    return redirect('webshop/webshop');
+    return redirect('webshop');
 });
 
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show');
