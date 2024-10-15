@@ -25,7 +25,7 @@ class ProductController extends Controller
         $products = $query->with('category')->get(); // Met category om de naam op te halen
 
         // Haal ook de categorieën om in de view te gebruiken
-        $categories = category::all(); // Zorg dat je deze regel hebt
+        $categories = Category::all(); // Zorg dat je deze regel hebt
 
         return view('webshop.webshop', compact('products', 'categories')); // Zorg ervoor dat je $categories hier doorgeeft
     }
