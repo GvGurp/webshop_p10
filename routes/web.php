@@ -4,7 +4,9 @@
 
 use App\Http\Controllers\ProductController;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use faker\Factory; 
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
@@ -80,24 +82,24 @@ Route::get('/webshop/webshop', function () {
 })->name('webshop/webshop');
 
 Route::get('/webshop/admincreate', function () {
-    $categories = \App\Models\Category::all();
+    $categories = App\Models\Category::all();
     return view('webshop/adminCreate', compact('categories'));
-})->name('webshop/adminCreate');
+})->name('adminCreate');
 
 /////////////////////////////////////////////////////CRUD///////////////////////////////////////////////////////////////////
 
 
+
 /// show (Tishanty)///
 
-Route::get('adminCreate', function () {
-    $products = \App\Models\product::all();
-    return view('webshop/adminCreate', compact('products'));
+Route::get('webshop', function () {
+    $categories = Category::all();
+    $products = App\Models\product::all();
+    return view('webshop/webshop', compact('products', 'categories'));
 });
 
-
-//create crud//
 Route::post('adminCreate', function () {
-    \App\Models\product::Create([
+    App\Models\product::Create([
         'name' => request('name'),
         'price' => request('price'),
         'picture' => request('picture'),
@@ -108,31 +110,22 @@ Route::post('adminCreate', function () {
     return redirect('webshop/webshop');
 });
 
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show');
+
+
+
 
 ////////////////////////////////////////////////////AUTH////////////////////////////////////////////////////////////////////
 Auth::routes();
 
 Route::get('/admin/create', [AdminController::class, 'create'])->name('adminCreate')->middleware('auth');
+//Route::get('/admin/create', [AdminController::class, 'create'])->name('adminCreate')->middleware('auth');
 
 
-//create
-Route::post('webshop', function () {
-    \App\Models\product::create([
-        'name' => request('name'),
-        'price' => request('price'),
-        'product_id' => 1
-    ]);
-    return redirect('/');
-});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /////////////////////////////////////////////////CART/////////////////////////////////////////////////////////
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show');
 
-Route::get('/webshop/webshop', function () {
-    return view('webshop/webshop');
-})->name('webshop.webshop');
 
 
 // Route voor het tonen van de webshop (met filters)
@@ -145,3 +138,4 @@ Route::post('/cart/remove/{product}', [CartController::class, 'remove'])->name('
 Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 ////////////////////////////////////////////////////AUTH////////////////////////////////////////////////////////////////////
 Auth::routes();
+
