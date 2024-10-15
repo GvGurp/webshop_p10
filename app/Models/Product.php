@@ -12,15 +12,16 @@ class Product extends Model
 
     // Tabel naam (Gaby)
 
-    protected $table = 'product';  
+    protected $table = 'product';
 
     // Inhoud tabel products (Gaby)
     protected $fillable = [
         'name',
         'picture',
         'specifications',
-        'prize',
+        'price',
         'productInformation',
+        'category_id'
 
 
     ];

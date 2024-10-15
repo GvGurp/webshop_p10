@@ -1,8 +1,8 @@
 <?php
 
 namespace Database\Seeders;
-use Illuminate\Database\Seeder; 
-use App\Models\Product; 
+use Illuminate\Database\Seeder;
+use App\Models\Product;
 use App\Models\Category;
 use Faker\Factory as Faker;
 
@@ -14,8 +14,7 @@ class ProductSeeder extends Seeder
 
         // Pak alle categories die bestaan (Gaby)
         $categories = Category::all();
-
-        foreach ($categories as $category) {
+         foreach ($categories as $category) {
             for ($i = 0; $i < 5; $i++) {
                 Product::create([
                     'name' => ucfirst($category->name) . ' ' . ($i + 1),  // Bijvoorbeeld laptop 1 (Gaby)

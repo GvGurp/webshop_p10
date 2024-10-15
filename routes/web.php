@@ -1,17 +1,20 @@
 <?php
 
 
+
 use App\Http\Controllers\ProductController;
+use App\Models\Product;
+use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 
 
-
-////////////////////////////De routes die de pagina verbinden via de navigatie 
+////////////////////////////De routes die de pagina verbinden via de navigatie
 
 
 Route::get('/', function () {
-   return view('home');
+    return view('home');
 })->name('home');
 
 Route::get('/home', function () {
@@ -39,9 +42,9 @@ Route::get('/faq', function () {
 })->name('faq');
 
 
-    Route::get('/login', function () {
-        return view('login');
-    })->name('login');
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
 
 
 Route::get('/loginorsignup', function () {
@@ -77,7 +80,8 @@ Route::get('/webshop/webshop', function () {
 })->name('webshop/webshop');
 
 Route::get('/webshop/admincreate', function () {
-    return view('webshop/adminCreate');
+    $categories = \App\Models\Category::all();
+    return view('webshop/adminCreate', compact('categories'));
 })->name('webshop/adminCreate');
 
 /////////////////////////////////////////////////////CRUD///////////////////////////////////////////////////////////////////
@@ -85,10 +89,25 @@ Route::get('/webshop/admincreate', function () {
 
 /// show (Tishanty)///
 
-Route::get('webshop', function () {
+Route::get('adminCreate', function () {
     $products = \App\Models\product::all();
-    return view('webshop/webshop', compact('products'));
+    return view('webshop/adminCreate', compact('products'));
 });
+
+
+//create crud//
+Route::post('adminCreate', function () {
+    \App\Models\product::Create([
+        'name' => request('name'),
+        'price' => request('price'),
+        'picture' => request('picture'),
+        'productInformation' => request('productInformation'),
+        'specifications' => request('specifications'),
+        'category_id' => 1,
+    ]);
+    return redirect('webshop/webshop');
+});
+
 
 ////////////////////////////////////////////////////AUTH////////////////////////////////////////////////////////////////////
 Auth::routes();
@@ -97,8 +116,8 @@ Route::get('/admin/create', [AdminController::class, 'create'])->name('adminCrea
 
 
 //create
-Route::post('webshop', function () { 
-  \App\Models\product::create([
+Route::post('webshop', function () {
+    \App\Models\product::create([
         'name' => request('name'),
         'price' => request('price'),
         'product_id' => 1
@@ -126,4 +145,3 @@ Route::post('/cart/remove/{product}', [CartController::class, 'remove'])->name('
 Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 ////////////////////////////////////////////////////AUTH////////////////////////////////////////////////////////////////////
 Auth::routes();
-
