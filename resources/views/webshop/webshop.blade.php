@@ -44,10 +44,14 @@
 
                 <!-- Verberg de knop als de gebruiker niet is ingelogd (Gaby) -->
                 @auth
-                    <form action="{{ route('cart.add', $product->id) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">Toevoegen aan winkelmandje</button>
-                    </form>
+                <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                 @csrf
+                     <button type="submit" class="btn btn-primary">
+                       <img src="{{ asset('foto\'s/cartIcoon.png') }}" alt="Winkelmandje" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">
+                        Toevoegen aan winkelmandje
+                      </button>
+</form>
+
                 @endauth
             </li>
             <hr>
@@ -55,6 +59,3 @@
     </ul>
 </div>
 @endsection
-
-
-
