@@ -1,9 +1,9 @@
 @extends('layout.layout')
 
 @section('content')
-<div class="webshop">
-    <div class="titel"><h1>Webshop</h1></div>
 
+    <div class="titel"><h1>Webshop</h1></div>
+    <div class="webshop">
     <!-- Toon de melding als de gebruiker niet is ingelogd (Gaby) -->
     @guest
         <p class="text-danger">Je moet inloggen om producten toe te voegen aan je winkelmandje.</p>
