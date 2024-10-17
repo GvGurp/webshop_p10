@@ -4,6 +4,11 @@
 <div class="webshop">
     <div class="titel"><h1>Webshop</h1></div>
 
+    <!-- Toon de melding als de gebruiker niet is ingelogd (Gaby) -->
+    @guest
+        <p class="text-danger">Je moet inloggen om producten toe te voegen aan je winkelmandje.</p>
+    @endguest
+
     <!-- Filters -->
     <div class="filters">
         <form method="GET" action="{{ route('cart.webshop') }}">
@@ -37,16 +42,19 @@
                     <p>Geen afbeelding</p>
                 @endif
 
-                <form action="{{ route('cart.add', $product->id) }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-primary">Toevoegen aan winkelmandje</button>
-                </form>
+                <!-- Verberg de knop als de gebruiker niet is ingelogd (Gaby) -->
+                @auth
+                    <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Toevoegen aan winkelmandje</button>
+                    </form>
+                @endauth
             </li>
             <hr>
         @endforeach
-
-
-        
     </ul>
 </div>
 @endsection
+
+
+

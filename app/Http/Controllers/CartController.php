@@ -1,62 +1,80 @@
 <?php
- 
-// app/Http/Controllers/CartController.php
 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Illuminate\Support\Facades\Session; 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
     // Winkelmandje laten zien met totale prijs (Gaby)
     public function index()
     {
-        $cart = session()->get('cart', []);
+        // Controleer of de gebruiker is ingelogd (Gaby)
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om je winkelmandje te zien.');
+        }
+
+        // Winkelmandje ophalen van de ingelogde gebruiker (Gaby)
+        $cart = session()->get('cart_' . Auth::id(), []);
         $totalPrice = array_sum(array_column($cart, 'price'));
         return view('cart.index', compact('cart', 'totalPrice'));
     }
 
-    // Product toevoegen of meer erin zetten met behulp van sessions (Gaby)
+    // Product toevoegen aan het winkelmandje (Gaby)
     public function add(Product $product)
     {
-        $cart = session()->get('cart', []);
+        // Controleer of de gebruiker is ingelogd (Gaby)
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om producten toe te voegen.');
+        }
 
-        // Hier is product hoeveelheid verhogen met een if (Gaby)
-        if(isset($cart[$product->id])) {
+        $cart = session()->get('cart_' . Auth::id(), []);
+
+        // Verhoog het aantal als het product al in het winkelmandje zit (Gaby)
+        if (isset($cart[$product->id])) {
             $cart[$product->id]['total']++;
         } else {
-            // Als je product niet hebt dan kan je het toevoegen als else (Gaby)
+            // Voeg product toe als het nog niet in het winkelmandje zit (Gaby)
             $cart[$product->id] = [
                 'name' => $product->name,
                 'price' => $product->price,
                 'total' => 1
             ];
         }
-         
-        /// Tekst laten zien als het gelukt is (Gaby)
-        session()->put('cart', $cart);
+
+        // Winkelmandje opslaan in de sessie van de gebruiker (Gaby)
+        session()->put('cart_' . Auth::id(), $cart);
         return redirect()->route('cart.index')->with('success', 'Product toegevoegd aan winkelmandje');
     }
 
-    // Verwijder product uit winkelmandje en ga terug naar cart pagina (Gaby)
+    // Verwijder product uit winkelmandje (Gaby)
     public function remove(Product $product)
     {
-        $cart = session()->get('cart', []);
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om producten te verwijderen.');
+        }
 
-        if(isset($cart[$product->id])) {
+        $cart = session()->get('cart_' . Auth::id(), []);
+
+        if (isset($cart[$product->id])) {
             unset($cart[$product->id]);
-            session()->put('cart', $cart);
+            session()->put('cart_' . Auth::id(), $cart);
         }
 
         return redirect()->route('cart.index')->with('success', 'Product verwijderd uit winkelmandje');
     }
 
-    // Laat chechout formulier zien (Gaby)
+    // Checkout laten zien (Gaby)
     public function checkout()
     {
-        $cart = session()->get('cart', []);
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om af te rekenen.');
+        }
+
+        $cart = session()->get('cart_' . Auth::id(), []);
         $totalPrice = array_sum(array_column($cart, 'price'));
         return view('cart.checkout', compact('cart', 'totalPrice'));
     }
