@@ -8,8 +8,8 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    @if($cart)
-        <table>  <!--Tabel voor de product informatie in de winkelmandje (Gaby) --> 
+    @if($cart) <!-- Controleren of het winkelmandje niet leeg is (Gaby) -->
+        <table> <!-- Tabel voor de productinformatie in het winkelmandje (Gaby) -->
             <thead>
                 <tr>
                     <th>Product</th>
@@ -23,9 +23,20 @@
                     <tr>
                         <td>{{ $details['name'] }}</td>
                         <td>€{{ number_format($details['price'], 2) }}</td>
-                        <td>{{ $details['total'] }}</td>
+                        <!-- Aantal aanpassen met pijltjes (Gaby) -->
                         <td>
-                            <form action="{{ route('cart.remove', $id) }}" method="POST">
+                              <form action="{{ route('cart.update', $id) }}" method="POST"> <!-- Route voor het bijwerken van het aantal producten -->
+                              @csrf
+                               <button type="button" onclick="this.form.elements['aantal'].stepDown()">&#8595;</button> <!-- Pijltje omlaag -->
+                               <input type="number" name="aantal" value="{{ $details['total'] }}" min="1" style="width: 50px; text-align: center;" required>
+                               <button type="button" onclick="this.form.elements['aantal'].stepUp()">&#8593;</button> <!-- Pijltje omhoog -->
+                               <button type="submit">Bijwerken</button> <!-- Knop om de hoeveelheid bij te werken -->
+                               </form>
+                        </td>
+
+
+                        <td>
+                            <form action="{{ route('cart.remove', $id) }}" method="POST"> <!--Om het product te verwijderen (Gaby) -->
                                 @csrf
                                 <button type="submit">Verwijderen</button>
                             </form>
@@ -35,9 +46,8 @@
             </tbody>
         </table>
 
-        <h3>Totaal: €{{ number_format($totalPrice, 2) }}</h3> <!-- de totale prijs laten zien met maar twee dicimalen (Gaby)--> 
-        <a href="{{ route('cart.checkout') }}" class="btn btn-primary">Afrekenen</a> <!--naar de chechout kunnen gaan (Gaby) -->
+        <h3>Totaal: €{{ number_format($totalPrice, 2) }}</h3> <!-- De totale prijs met twee decimalen tonen (Gaby) --> 
+        <a href="{{ route('cart.checkout') }}" class="btn btn-primary">Afrekenen</a> <!-- Naar de checkout kunnen gaan (Gaby) -->
         <a class="btn btn-primary" href="{{ route('cart.webshop') }}">Verder winkelen</a> 
-
     @endif
 @endsection
