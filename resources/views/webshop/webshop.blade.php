@@ -4,7 +4,6 @@
 
 <div class="titel"><h1>Webshop</h1></div>
 <div class="webshop">
-    <!-- Toon de melding als de gebruiker niet is ingelogd (Gaby) -->
 
     <!-- Toon de afbeelding van het winkelmandje als de gebruiker is ingelogd (Gaby) -->
     @auth
