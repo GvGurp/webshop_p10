@@ -28,15 +28,12 @@ Route::view('/bezorgdiensten', 'bezorgdiensten')->name('bezorgdiensten');  // De
 // Webshop overzicht met filters (Gaby)
 Route::get('/webshop', [ProductController::class, 'index'])->name('cart.webshop');
 
+
 /////////////////////////////////////////////////////CRUD///////////////////////////////////////////////////////////////////
 
 /// show (Tishanty)///
 
-Route::get('webshop', function () {
-    $categories = Category::all();
-    $products = App\Models\product::all();
-    return view('webshop/webshop', compact('products', 'categories'));
-});
+
 
 Route::post('adminCreate', function () {
     App\Models\product::Create([

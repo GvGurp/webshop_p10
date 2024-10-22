@@ -65,7 +65,7 @@ public function add(Product $product)
 {
     $user = Auth::user();
     CartItem::where('user_id', $user->id)->where('product_id', $product->id)->delete();
-    return redirect()->route('cart.index')->with('success', 'Product verwijderd uit winkelmandje');
+    return redirect()->route('cart.index')->with('success', 'Product verwijderd uit winkelmandje ');
 }
 
 
@@ -86,15 +86,32 @@ public function add(Product $product)
     return redirect()->back()->with('success', 'Product bijgewerkt!');
 }
 
+  
     // Checkout laten zien met alle gegevens van winkelmandje (Gaby)
-    public function checkout()
-    {
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om af te rekenen.');
-        }
-
-        $cart = session()->get('cart_' . Auth::id(), []);
-        $totalPrice = array_sum(array_column($cart, 'price'));
-        return view('cart.checkout', compact('cart', 'totalPrice'));
+public function checkout()
+{
+    if (!Auth::check()) {
+        return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om af te rekenen.');
     }
+
+    $user = Auth::user();
+    $cartItems = CartItem::where('user_id', $user->id)->get();
+
+    $cart = [];
+    $totalPrice = 0;
+
+    // Bouw het winkelmandje op vanuit de CartItems van de database (Gaby)
+    foreach ($cartItems as $item) {
+        $product = $item->product;
+        $cart[$product->id] = [
+            'name' => $product->name,
+            'price' => $product->price,
+            'total' => $item->total,
+        ];
+        $totalPrice += $product->price * $item->total; // Bereken de totale prijs (Gaby)
+    }
+
+    // Toon de checkout pagina met winkelmandgegevens en totale prijs
+    return view('cart.checkout', compact('cart', 'totalPrice'));
+}
 }

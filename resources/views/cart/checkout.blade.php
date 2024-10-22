@@ -83,7 +83,10 @@
             <!-- Bestelling plaatsen knop (Gaby) -->
             <button type="submit" class="btn btn-success" style="margin-top: 10px;">Bestelling plaatsen</button>
         </form>
-    @else  <!-- Als de winkelmand leeg is (Gaby) -->
+    @else 
+     <!-- Als de winkelmand leeg is (Gaby) -->
         <p>Je winkelmandje is leeg.</p>
     @endif
+
+    
 @endsection

@@ -24,8 +24,8 @@
 
     <!-- Filters -->
     <div class="filters">
-        <form method="GET" action="{{ route('cart.webshop') }}">
-            <h3>Categorieën</h3>
+    <form method="GET" action="{{ route('cart.webshop') }}">
+    <h3>Categorieën</h3>
             @foreach($categories as $category)
                 <label>
                     <input type="checkbox" name="category[]" value="{{ $category->id }}"
