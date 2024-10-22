@@ -13,7 +13,7 @@ Route::view('/home', 'home')->name('home');
 Route::view('/bestellen', 'bestellen')->name('bestellen');
 Route::view('/faq', 'faq')->name('faq');
 Route::view('/account', 'account')->name('account');
-Route::view('/overons', 'overOns')->name('overOns');
+Route::view('/overOns', 'overOns')->name('overOns');
 
 ///////////////////////// Routes voor service, zakelijk, verzoeken en bezorgdiensten //////////////////////////
 
@@ -28,8 +28,34 @@ Route::view('/bezorgdiensten', 'bezorgdiensten')->name('bezorgdiensten');  // De
 // Webshop overzicht met filters (Gaby)
 Route::get('/webshop', [ProductController::class, 'index'])->name('cart.webshop');
 
-// Product details pagina
+/////////////////////////////////////////////////////CRUD///////////////////////////////////////////////////////////////////
+
+/// show (Tishanty)///
+
+Route::get('webshop', function () {
+    $categories = Category::all();
+    $products = App\Models\product::all();
+    return view('webshop/webshop', compact('products', 'categories'));
+});
+
+Route::post('adminCreate', function () {
+    App\Models\product::Create([
+        'name' => request('name'),
+        'price' => request('price'),
+        'picture' => request('picture'),
+        'productInformation' => request('productInformation'),
+        'specifications' => request('specifications'),
+        'category_id' => 1,
+    ]);
+    return redirect('webshop');
+});
+
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show');
+
+///////////// update (Ola) //////////////////////////////
+
+Route::get('webshop/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('admin/products/{id}', [ProductController::class, 'update'])->name('products.update');
 
 /////////////////////// Cart routes met middleware ///////////////////////////
 
