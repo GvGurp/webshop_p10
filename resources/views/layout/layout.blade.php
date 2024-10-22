@@ -9,7 +9,7 @@
 <body>
 <nav id="navbar">
     <div id="logonav">
-    <img src="{{ asset('foto\'s/cropped-logo%20UNEED-IT.png') }}" alt="De logo van UNEED-IT">
+        <img src="{{ asset('foto\'s/cropped-logo%20UNEED-IT.png') }}" alt="De logo van UNEED-IT">
     </div>
     <div id="logoptions">
         <ul>
@@ -21,18 +21,21 @@
             <li class="bluec"> <a href="faq">Faq </a> </li>
             <li class="redc"><a href="bezorgdiensten"> Bezorgdiensten </a></li>
             <li class="bluec"> <a href="account">Account </a> </li>
-             <!-- pagina's staan in mapje webshop (Gaby) -->
             <li class="bluec"><a href="webshop"> webshop  </a> </li>
-            <li class="redc"> <a href="webshop/admincreate">admin create </a> </li>
-            <li class="redc"> <a href="webshop/adminBewerken">admin bewerken </a> </li>
-            <!--auth inloggen en registratie (Ola) -->
-             <!-- Auth Links - Alleen tonen als gebruiker NIET is ingelogd(Ola) -->
+
+            @auth
+                <!-- Controleer of de ingelogde gebruiker de admin is -->
+                @if (Auth::user()->email === 'uneedit-admin@gmail.com')
+                    <li class="redc"> <a href="webshop/admincreate">admin create </a> </li>
+                    <li class="redc"> <a href="webshop/adminBewerken">admin bewerken </a> </li>
+                @endif
+            @endauth
+
             @guest
                 <li class="bluec"><a href="{{ route('login') }}">Inloggen</a></li>
                 <li class="redc"><a href="{{ route('register') }}">Registreren</a></li>
             @endguest
 
-            <!-- Logout knop - Alleen tonen als gebruiker IS ingelogd (Ola)-->
             @auth
                 <li class="bluec">
                     <a href="{{ route('logout') }}" 
@@ -40,15 +43,14 @@
                         Uitloggen
                     </a>
                 </li>
-                <!-- Formulier voor het uitloggen -->
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
             @endauth
-
         </ul>
     </div>
 </nav>
+
     <!-- Inhoud dat op de pagina komt te staan (Gaby) -->
     <div class="">
         @yield ('content')
