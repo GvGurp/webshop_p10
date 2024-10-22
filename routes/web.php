@@ -72,3 +72,5 @@ Route::get('/webshop/admincreate', function () {
 
 /////////////////////// Authenticatie routes ///////////////////////////
 Auth::routes();
+
+Route::get('/product-details/{id}', [ProductController::class, 'getProductDetails'])->name('products.details');

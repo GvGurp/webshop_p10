@@ -54,6 +54,98 @@
         @yield ('content')
     </div>
 
+    <!-- Modal -->
+    <div id="productModal" class="modal" style="display:none;">
+        <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modal-body">
+            <!-- De productinformatie zal hier worden geladen -->
+        </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        // Luister naar het klikken op een productlink
+        $(document).on('click', '.product-item a', function(e) {
+            e.preventDefault();
+            var productId = $(this).data('id'); // Haal het ID van het product op
+
+            // Maak een AJAX-verzoek om de productgegevens op te halen
+            $.ajax({
+                url: "/product-details/" + productId,
+                method: 'GET',
+                success: function(data) {
+                    // Vul de modal-body met productinformatie
+                    var modalContent = `
+                        <h2>${data.name}</h2>
+                        <img src="/storage/${data.picture}" alt="${data.name}" style="max-width: 100px;">
+                        <p><strong>Prijs:</strong> €${data.price}</p>
+                        <p><strong>Informatie:</strong> ${data.productInformation}</p>
+                        <p><strong>Specificaties:</strong> ${data.specifications}</p>
+                        <p><strong>Voorraad:</strong> ${data.voorraad}</p>
+                    `;
+                    $('#modal-body').html(modalContent);
+
+                    // Toon de modal
+                    $('#productModal').fadeIn();
+                }
+            });
+        });
+
+        // Sluit de modal wanneer de gebruiker op de sluitknop klikt
+        $('.close').on('click', function() {
+            $('#productModal').fadeOut();
+        });
+
+        // Sluit de modal wanneer de gebruiker buiten de modal klikt
+        $(window).on('click', function(e) {
+            if ($(e.target).is('#productModal')) {
+                $('#productModal').fadeOut();
+            }
+        });
+    });
+    </script>
+
+    <div id="search-results"></div>
+
+    <script>
+    $(document).ready(function() {
+        $('#search-input').on('keyup', function() {
+            var query = $(this).val();
+            if (query.length > 2) {
+                $.ajax({
+                    url: "{{ route('products.ajaxSearch') }}",
+                    method: 'GET',
+                    data: { query: query },
+                    success: function(data) {
+                        $('#search-results').empty();
+                        
+                        if (data.length > 0) {
+                            data.forEach(function(product) {
+                                $('#search-results').append(`
+                                    <div class="product-item">
+                                        <a href="#" data-id="${product.id}">
+                                            <strong>${product.name}</strong> - €${product.price}
+                                        </a>
+                                        <p>${product.productInformation}</p>
+                                    </div>
+                                `);
+                            });
+                        } else {
+                            $('#search-results').html('<p>Geen producten gevonden.</p>');
+                        }
+                    }
+                });
+            } else {
+                $('#search-results').empty();
+            }
+        });
+    });
+    </script>
+
+
 <footer id="footer">
     <div id="adress">
     <img src="{{ asset('foto\'s/location.png') }}" alt="Afbeelding van een locatie icoon ">
