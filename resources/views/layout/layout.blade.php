@@ -24,6 +24,7 @@
              <!-- pagina's staan in mapje webshop (Gaby) -->
             <li class="bluec"><a href="webshop"> webshop  </a> </li>
             <li class="redc"> <a href="webshop/admincreate">admin create </a> </li>
+            <li class="redc"> <a href="webshop/adminBewerken">admin bewerken </a> </li>
             <!--auth inloggen en registratie (Ola) -->
              <!-- Auth Links - Alleen tonen als gebruiker NIET is ingelogd(Ola) -->
             @guest
