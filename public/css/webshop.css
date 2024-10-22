@@ -1,25 +1,24 @@
 .webshop {
     display: flex;
-    justify-content: right;
-    align-items: center;
-    max-width: 100%;
-
-
+    flex-direction: column;
+    margin-top: 40px;
 }
 
 .producten {
     display: block;
     list-style-type: none;
     color: black;
-
 }
 
 .titel {
     display: block;
-    font-size: 50px;
+    font-size: 5em;
     font-weight: bold;
 }
 
+.filters {
+    margin-left: 2em;
+}
 
 /* Voeg dit toe aan je CSS-bestand (bijv. in een apart .css bestand of inline) */
 .filter-container {
@@ -60,9 +59,25 @@ ul.producten {
 
 ul.producten li {
     margin-bottom: 20px;
+    border: 2px solid black;
+    padding: 1em;
+    border-radius: 1em;
+    max-width: 110%;
 }
 
 ul.producten img {
     max-width: 100px;
     height: auto;
+}
+
+.alles {
+    display: flex;
+    gap: 10em;
+    padding-right: 30px;
+}
+
+.filt {
+    border: solid 2px black;
+    border-radius: 2em;
+    background-color: #f2f2f2;
 }
