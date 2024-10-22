@@ -17,24 +17,19 @@ Route::view('/overOns', 'overOns')->name('overOns');
 
 ///////////////////////// Routes voor service, zakelijk, verzoeken en bezorgdiensten //////////////////////////
 
-// Deze views bevinden zich in resources/views
 Route::view('/service', 'service')->name('service');
 Route::view('/zakelijk', 'zakelijk')->name('zakelijk');
 Route::view('/verzoeken', 'verzoeken')->name('verzoeken');
-Route::view('/bezorgdiensten', 'bezorgdiensten')->name('bezorgdiensten');  // Deze route toegevoegd
+Route::view('/bezorgdiensten', 'bezorgdiensten')->name('bezorgdiensten');  
 
 /////////////////////// Webshop routes ///////////////////////////
 
 // Webshop overzicht met filters (Gaby)
 Route::get('/webshop', [ProductController::class, 'index'])->name('cart.webshop');
 
-
 /////////////////////////////////////////////////////CRUD///////////////////////////////////////////////////////////////////
 
-/// show (Tishanty)///
-
-
-
+// Show product details (Tishanty)
 Route::post('adminCreate', function () {
     App\Models\product::Create([
         'name' => request('name'),
@@ -49,10 +44,14 @@ Route::post('adminCreate', function () {
 
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show');
 
-///////////// update (Ola) //////////////////////////////
-
+// Update product (Ola)
 Route::get('webshop/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('admin/products/{id}', [ProductController::class, 'update'])->name('products.update');
+
+// Delete product (Gaby)
+Route::get('/webshop', [ProductController::class, 'index'])->name('webshop');
+Route::get('/products/{id}/delete-confirmation', [ProductController::class, 'showDeleteConfirmation'])->name('products.showDeleteConfirmation');
+Route::delete('/products/{id}/confirm-delete', [ProductController::class, 'confirmDelete'])->name('products.confirmDelete');
 
 /////////////////////// Cart routes met middleware ///////////////////////////
 
@@ -66,14 +65,10 @@ Route::middleware('auth')->group(function () {
 });
 
 /////////////////////// Admin Create route ///////////////////////////
-
-//Route::get('/admin/create', [AdminController::class, 'create'])->name('adminCreate')->middleware('auth');
-
 Route::get('/webshop/admincreate', function () {
     $categories = App\Models\Category::all();
     return view('webshop/adminCreate', compact('categories'));
 })->name('adminCreate');
 
 /////////////////////// Authenticatie routes ///////////////////////////
-
 Auth::routes();

@@ -2,9 +2,8 @@
 
 @section('content')
 
-
-    <div class="titel"><h1>Webshop</h1></div>
-    <div class="webshop">
+<div class="titel"><h1>Webshop</h1></div>
+<div class="webshop">
     <!-- Toon de melding als de gebruiker niet is ingelogd (Gaby) -->
 
     <!-- Toon de afbeelding van het winkelmandje als de gebruiker is ingelogd (Gaby) -->
@@ -17,14 +16,13 @@
     @endauth
 
     <!-- Toon de melding als de gebruiker niet is ingelogd -->
-
     @guest
         <p class="text-danger">Je moet inloggen om producten toe te voegen aan je winkelmandje.</p>
     @endguest
 
     <!-- Filters -->
     <div class="filters">
-    <form method="GET" action="{{ route('cart.webshop') }}">
+    <form method="GET" action="{{ route('cart.index') }}">
     <h3>Categorieën</h3>
             @foreach($categories as $category)
                 <label>
@@ -63,6 +61,12 @@
                        <img src="{{ asset('foto\'s/cartIcoon.png') }}" alt="Winkelmandje" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">
                         Toevoegen aan winkelmandje
                       </button>
+
+                      <!-- Knop om naar de productverwijderingspagina te gaan (Gaby) -->
+                       <a href="{{ route('products.showDeleteConfirmation', $product->id) }}" class="btn btn-danger">
+                     Verwijder Product
+                      </a>
+
                 </form>
                 @endauth
             </li>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category; 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -29,4 +30,37 @@ class ProductController extends Controller
 
         return view('webshop.webshop', compact('products', 'categories')); // Zorg ervoor dat je $categories hier doorgeeft
     }
-}; 
+
+    public function showDeleteConfirmation($id)
+    {
+        // Haal het product op dat verwijderd gaat worden (Gaby)
+        $product = Product::findOrFail($id);
+
+        // Stuur het product door naar de AdminDelete view (Gaby)
+        return view('webshop/adminDelete', compact('product'));
+    }
+
+    public function confirmDelete(Request $request, $id)
+{
+    // Valideer de gebruikersnaam en het wachtwoord
+    $credentials = $request->only('email', 'password'); // Zorg ervoor dat je de juiste velden gebruikt
+
+    if (Auth::attempt($credentials)) {
+        // Haal het product op dat verwijderd moet worden
+        $product = Product::find($id); // Hier gebruik je find() in plaats van findOrFail()
+
+        if (!$product) {
+            return redirect()->route('webshop')->with('error', 'Product niet gevonden.');
+        }
+
+        $product->delete(); // Verwijder het product
+
+        // Geef een succesmelding terug
+        return redirect()->route('webshop')->with('success', 'Product succesvol verwijderd.');
+    }
+
+    // Geef een foutmelding terug als de validatie faalt
+    return redirect()->back()->with('error', 'Ongeldige email of wachtwoord.'); // This will redirect back with an error message.
+}
+
+}
