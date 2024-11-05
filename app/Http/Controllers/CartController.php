@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CartItem; 
+use App\Models\Category;
 
 
 class CartController extends Controller
 {
     // Winkelmandje laten zien met totale prijs (Gaby)
+    
+    
     public function index()
 {
     if (!Auth::check()) { return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om je winkelmandje te zien.'); }
@@ -114,4 +117,12 @@ public function checkout()
     // Toon de checkout pagina met winkelmandgegevens en totale prijs
     return view('cart.checkout', compact('cart', 'totalPrice'));
 }
-}
+
+public function webshop()
+{
+    $products = Product::all(); // Haal alle producten op
+    $categories = Category::all(); // Haal alle categorieën op
+
+    // Geef de view terug met zowel producten als categorieën
+    return view('webshop.webshop', compact('products', 'categories'));
+}}

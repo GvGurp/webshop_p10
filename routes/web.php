@@ -57,6 +57,14 @@ Route::delete('/products/{id}/confirm-delete', [ProductController::class, 'confi
 
 // Winkelmandje alleen beschikbaar voor ingelogde gebruikers (Gaby)
 Route::middleware('auth')->group(function () {
+
+    
+
+
+
+
+
+    Route::get('/webshop', [CartController::class, 'webshop'])->name('cart.webshop');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
     Route::post('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
