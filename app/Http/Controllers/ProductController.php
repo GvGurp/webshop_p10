@@ -8,6 +8,21 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+    public function show($id)
+    {
+    $product = Product::findOrFail($id);
+    return response()->json($product);
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Zoek naar producten die overeenkomen met de query
+        $products = Product::where('name', 'LIKE', "%{$query}%")->get();
+
+        return response()->json($products);
+    }
+
     public function getProductDetails($id){
         // Haal het product op met het gegeven ID of geef een 404-fout terug
         $product = Product::findOrFail($id);
@@ -41,51 +56,58 @@ class ProductController extends Controller
         return view('webshop.webshop', compact('products', 'categories'));
     }
 
-    // Toon het formulier om een product te bewerken
+
     public function edit($id)
     {
-        $product = Product::find($id); // Haal het specifieke product op
-        $categories = Category::all(); // Haal alle categorieën op
+    // Haal het product op met de opgegeven ID
+    $product = Product::findOrFail($id);
 
-        // Verwijs naar de adminUpdateFormulier view
-        return view('webshop.adminUpdateFormulier', compact('product', 'categories'));
+    // Haal alle categorieën op voor de dropdown
+    $categories = Category::all();
+
+    // Geef de view door met het product en de categorieën
+    return view('adminBewerken', compact('product', 'categories'));
     }
 
-    // Werk het product bij in de database
-    public function update(Request $request, $id)
-    {
-        // Validatie van de invoer
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required|numeric',
-            'category_id' => 'required|exists:categories,id',
-            'productInformation' => 'nullable',
-            'specifications' => 'nullable',
-            'picture' => 'nullable|image|max:2048'
-        ]);
 
-        // Haal het product op
-        $product = Product::find($id);
+public function update(Request $request, $id)
+{
+    // Validatie van de invoer
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric',
+        'category_id' => 'required|exists:categories,id',
+        'productInformation' => 'nullable|string',
+        'specifications' => 'nullable|string',
+        'picture' => 'nullable|image|max:2048' // Validatie voor de afbeelding
+    ]);
 
-        // Update de productinformatie
-        $product->name = $request->input('name');
-        $product->price = $request->input('price');
-        $product->category_id = $request->input('category_id');
-        $product->productInformation = $request->input('productInformation');
-        $product->specifications = $request->input('specifications');
+    // Haal het product op
+    $product = Product::findOrFail($id);
 
-        // Verwerk de afbeelding indien deze is geüpload
-        if ($request->hasFile('picture')) {
-            $imagePath = $request->file('picture')->store('products', 'public');
-            $product->picture = $imagePath;
+    // Update de productinformatie
+    $product->name = $request->input('name');
+    $product->price = $request->input('price');
+    $product->category_id = $request->input('category_id');
+    $product->productInformation = $request->input('productInformation');
+    $product->specifications = $request->input('specifications');
+
+    // Verwerk de afbeelding indien deze is geüpload
+    if ($request->hasFile('picture')) {
+        // Verwijder de oude afbeelding als deze bestaat
+        if ($product->picture) {
+            Storage::disk('public')->delete($product->picture);
         }
-
-        // Sla de wijzigingen op in de database
-        $product->save();
-
-        // Redirect terug naar de admin productlijst met een succesmelding
-        return redirect()->route('admin.products.index')->with('success', 'Product succesvol bijgewerkt');
+        $imagePath = $request->file('picture')->store('products', 'public');
+        $product->picture = $imagePath;
     }
+
+    // Sla de wijzigingen op in de database
+    $product->save();
+
+    return redirect()->route('admin.products.index')->with('success', 'Product succesvol bijgewerkt.');
+}
+
 
     public function showDeleteConfirmation($id)
     {

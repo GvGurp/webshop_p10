@@ -5,7 +5,7 @@
 <main>
 <div class="container">
     <h1 class="textbezorg">Bezorgdiensten</h1>
-    <p class="textbezorg"> Als gebruiker wil ik informatie zien over bezorgdiensten zoals UPS, DHL, Homerr, zodat ik kan kiezen voor ophalen en verzenden.</p>
+    <p class="textbezorg"> Onze bezorgdiensten zijn beschikbaar van maandag tot en met vrijdag tussen 10:00 en 17:30. Plaats uw bestelling binnen deze tijden voor snelle en efficiënte levering</p>
     <p class="textbezorg">Kies een bezorgdienst:</p>
     <ul>
         <li><button class="bezorgdiensten" onclick="selectBezorgdienst('UPS')">UPS</button></li>

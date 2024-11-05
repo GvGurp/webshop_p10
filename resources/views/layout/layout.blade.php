@@ -14,10 +14,10 @@
     <div id="logoptions">
         <ul>
             <li class="redc"> <a href="home">Home</a> </li>
-            <li class="bluec"> <a href="overons">Over ons </a></li>
+            <li class="bluec"> <a href="overOns">Over ons </a></li>
             <li class="redc"> <a href="service">Service </a></li>
             <li class="bluec" > <a href="zakelijk">Zakelijk </a></li>
-            <li class="redc" > <a href="verzoeken">Verzoeken </a></li>
+            <li class="redc"><a href="{{ route('requests.index') }}">Verzoeken</a></li>
             <li class="bluec"> <a href="faq">Faq </a> </li>
             <li class="redc"><a href="bezorgdiensten"> Bezorgdiensten </a></li>
             <li class="bluec"> <a href="account">Account </a> </li>
@@ -27,7 +27,7 @@
                 <!-- Controleer of de ingelogde gebruiker de admin is -->
                 @if (Auth::user()->email === 'uneedit-admin@gmail.com')
                     <li class="redc"> <a href="webshop/admincreate">admin create </a> </li>
-                    <li class="redc"> <a href="webshop/adminBewerken">admin bewerken </a> </li>
+                    <li class="redc"> <a href="webshop/adminBewerken">admin bewerken</a> </li>
                 @endif
             @endauth
 

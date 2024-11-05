@@ -19,7 +19,7 @@
                 @endif
 
                 <!-- Knop om product te wijzigen -->
-                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">
+                <a href="{{ route('adminBewerken', $product->id) }}" class="btn btn-warning">
                     Wijzig Product
                 </a>
 

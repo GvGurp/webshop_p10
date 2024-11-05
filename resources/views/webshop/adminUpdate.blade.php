@@ -4,7 +4,7 @@
 <div class="edit-product">
     <h1>Wijzig Product: {{ $product->name }}</h1>
 
-    <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('adminUpdate', $product->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 

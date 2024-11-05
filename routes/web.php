@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RequestController;
+use App\Http\Controllers\AccountController;
 use App\Models\Category; 
 use faker\Factory;  
 
@@ -12,15 +14,25 @@ Route::view('/', 'home')->name('home');
 Route::view('/home', 'home')->name('home');
 Route::view('/bestellen', 'bestellen')->name('bestellen');
 Route::view('/faq', 'faq')->name('faq');
-Route::view('/account', 'account')->name('account');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/account', [AccountController::class, 'showAccount'])->name('account.show');
+    Route::match(['put', 'post'], '/account/update', [AccountController::class, 'update'])->name('account.update');
+});
+
 Route::view('/overOns', 'overOns')->name('overOns');
 
 ///////////////////////// Routes voor service, zakelijk, verzoeken en bezorgdiensten //////////////////////////
 
 Route::view('/service', 'service')->name('service');
 Route::view('/zakelijk', 'zakelijk')->name('zakelijk');
-Route::view('/verzoeken', 'verzoeken')->name('verzoeken');
+Route::middleware('auth')->group(function () {
+    Route::get('/requests', [RequestController::class, 'index'])->name('requests.index');
+    Route::post('/requests', [RequestController::class, 'createRequest'])->name('requests.create');
+});
 Route::view('/bezorgdiensten', 'bezorgdiensten')->name('bezorgdiensten');  
+
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/search', [ProductController::class, 'search'])->name('search.product');
 
 /////////////////////// Webshop routes ///////////////////////////
 
@@ -45,8 +57,8 @@ Route::post('adminCreate', function () {
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show');
 
 // Update product (Ola)
-Route::get('webshop/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-Route::put('admin/products/{id}', [ProductController::class, 'update'])->name('products.update');
+Route::get('webshop/adminBewerken/{id}', [ProductController::class, 'edit'])->name('adminBewerken');
+Route::put('/adminUpdate/{id}', [ProductController::class, 'update'])->name('adminUpdate');
 
 // Delete product (Gaby)
 Route::get('/webshop', [ProductController::class, 'index'])->name('webshop');
