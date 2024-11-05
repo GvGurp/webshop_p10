@@ -6,6 +6,7 @@
 
     <ul class="producten">
         @foreach($products as $product)
+
             <li>
                 <strong>{{ $product->name }}</strong><br>
                 <strong>Prijs:</strong> €{{ $product->price }}<br>
@@ -13,7 +14,7 @@
                 <p><strong>Specificaties:</strong> {{ $product->specifications }}</p>
 
                 @if($product->picture)
-                    <img src="{{ asset('storage/' . $product->picture) }}" alt="{{ $product->name }}" style="max-width: 100px;">
+                    <img src="{{ asset('storage/' . $product->picture) }}" alt="{{ $product->name }}" style="max-inline-size: 100px;">
                 @else
                     <p>Geen afbeelding</p>
                 @endif
@@ -24,12 +25,15 @@
                 </a>
 
                 <!-- Knop om product te verwijderen -->
-                <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">
-                        Verwijder Product
-                    </button>
+                @auth
+                    
+                        @csrf
+                
+                        <a href="{{ route('products.showDeleteConfirmation', $product->id) }}" class="btn btn-danger">
+                            Verwijder Product
+                        </a>
+                    </form>
+                @endauth
             </li>
             <hr>
         @endforeach

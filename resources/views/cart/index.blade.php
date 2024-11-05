@@ -28,7 +28,7 @@
                               <form action="{{ route('cart.update', $id) }}" method="POST"> <!-- Route voor het bijwerken van het aantal producten -->
                               @csrf
                                <button type="button" onclick="this.form.elements['aantal'].stepDown()">&#8595;</button> <!-- Pijltje omlaag -->
-                               <input type="number" name="aantal" value="{{ $details['total'] }}" min="1" style="width: 50px; text-align: center;" required>
+                               <input type="number" name="aantal" value="{{ $details['total'] }}" min="1" style="inline-size: 50px; text-align: center;" required>
                                <button type="button" onclick="this.form.elements['aantal'].stepUp()">&#8593;</button> <!-- Pijltje omhoog -->
                                <button type="submit">Bijwerken</button> <!-- Knop om de hoeveelheid bij te werken -->
                                </form>

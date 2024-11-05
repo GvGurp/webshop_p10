@@ -38,6 +38,7 @@ Route::get('/search', [ProductController::class, 'search'])->name('search.produc
 
 // Webshop overzicht met filters (Gaby)
 Route::get('/webshop', [ProductController::class, 'index'])->name('cart.webshop');
+Route::get('/adminBewerken', [ProductController::class, 'index'])->name('adminBewerken');
 
 /////////////////////////////////////////////////////CRUD///////////////////////////////////////////////////////////////////
 
@@ -57,8 +58,13 @@ Route::post('adminCreate', function () {
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show');
 
 // Update product (Ola)
-Route::get('webshop/adminBewerken/{id}', [ProductController::class, 'edit'])->name('adminBewerken');
+
 Route::put('/adminUpdate/{id}', [ProductController::class, 'update'])->name('adminUpdate');
+Route::delete('products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+//Route::get('webshop/adminBewerken/', [ProductController::class, 'edit'])->name('adminBewerken');
+
+
+
 
 // Delete product (Gaby)
 Route::get('/webshop', [ProductController::class, 'index'])->name('webshop');

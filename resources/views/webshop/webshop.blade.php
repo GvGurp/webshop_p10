@@ -66,9 +66,6 @@
                             <img src="{{ asset('foto\'s/cartIcoon.png') }}" alt="Winkelmandje" style="inline-size: 20px; block-size: 20px; vertical-align: middle; margin-right: 5px;">
                             Toevoegen aan winkelmandje
                         </button>
-                        <a href="{{ route('products.showDeleteConfirmation', $product->id) }}" class="btn btn-danger">
-                            Verwijder Product
-                        </a>
                     </form>
                 @endauth
             </li>

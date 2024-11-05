@@ -24,12 +24,11 @@
             <li class="bluec"><a href="webshop"> webshop  </a> </li>
 
             @auth
-                <!-- Controleer of de ingelogde gebruiker de admin is -->
                 @if (Auth::user()->email === 'uneedit-admin@gmail.com')
-                    <li class="redc"> <a href="webshop/admincreate">admin create </a> </li>
-                    <li class="redc"> <a href="webshop/adminBewerken">admin bewerken</a> </li>
+                   <li class="redc"> <a href="webshop/admincreate">admin create</a> </li>
+                   <li class="redc"> <a href="{{ route('adminBewerken', ['id' => 1]) }}">admin bewerken</a> </li> <!-- Pas de ID aan naar de gewenste waarde -->
                 @endif
-            @endauth
+          @endauth
 
             @guest
                 <li class="bluec"><a href="{{ route('login') }}">Inloggen</a></li>

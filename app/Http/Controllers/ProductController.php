@@ -13,6 +13,15 @@ class ProductController extends Controller
     $product = Product::findOrFail($id);
     return response()->json($product);
     }
+
+    public function destroy($id)
+{
+    $product = Product::findOrFail($id);
+    $product->delete();
+
+    return redirect()->route('adminBewerken', ['id' => $id])->with('success', 'Product succesvol verwijderd!');
+}
+
     public function search(Request $request)
     {
         $query = $request->input('query');
@@ -57,17 +66,20 @@ class ProductController extends Controller
     }
 
 
+
+
+
     public function edit($id)
-    {
-    // Haal het product op met de opgegeven ID
-    $product = Product::findOrFail($id);
+{
+    $product = Product::find($id);
 
-    // Haal alle categorieën op voor de dropdown
-    $categories = Category::all();
-
-    // Geef de view door met het product en de categorieën
-    return view('adminBewerken', compact('product', 'categories'));
+    if (!$product) {
+        return redirect()->route('some.route')->with('error', 'Product niet gevonden');
     }
+
+    return view('webshop.adminBewerken', compact('product'));
+}
+
 
 
 public function update(Request $request, $id)
@@ -128,13 +140,13 @@ public function update(Request $request, $id)
         $product = Product::find($id); // Hier gebruik je find() in plaats van findOrFail()
 
         if (!$product) {
-            return redirect()->route('webshop')->with('error', 'Product niet gevonden.');
+            return redirect()->route('adminBewerken')->with('error', 'Product niet gevonden.');
         }
 
         $product->delete(); // Verwijder het product
 
         // Geef een succesmelding terug
-        return redirect()->route('webshop')->with('success', 'Product succesvol verwijderd.');
+        return redirect()->route('adminBewerken')->with('success', 'Product succesvol verwijderd.');
     }
 
     // Geef een foutmelding terug als de validatie faalt
