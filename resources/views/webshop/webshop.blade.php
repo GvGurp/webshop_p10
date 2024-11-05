@@ -7,11 +7,11 @@
 
     <!-- Toon de afbeelding van het winkelmandje als de gebruiker is ingelogd (Gaby) -->
     @auth
-    <div class="winkelmandje-icon">
-        <a href="{{ route('cart.index') }}">
-            <img src="{{ asset('foto\'s/cartIcoon.png') }}" alt="Winkelmandje" style="width: 40px; height: 40px; vertical-align: middle; margin-bottom: 20px;">
-        </a>
-    </div>
+        <div class="winkelmandje-icon">
+            <a href="{{ route('cart.index') }}">
+                <img src="{{ asset('foto\'s/cartIcoon.png') }}" alt="Winkelmandje" style="width: 40px; height: 40px; vertical-align: middle; margin-bottom: 20px;">
+            </a>
+        </div>
     @endauth
 
     <!-- Toon de melding als de gebruiker niet is ingelogd -->
