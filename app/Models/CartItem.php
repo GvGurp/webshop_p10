@@ -3,9 +3,15 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
+use HasFactory;
+
 
 class CartItem extends Model
 {
+
+    
+    // Specificeer de juiste tabelnaam (Gaby)
+    protected $table = 'cartItems';
     protected $fillable = ['user_id', 'product_id', 'total'];
 
     public function product()
