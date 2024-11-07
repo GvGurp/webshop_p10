@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AccountController;
 use App\Models\Category; 
 use faker\Factory;  
@@ -100,3 +101,12 @@ Route::get('/webshop/admincreate', function () {
 Auth::routes();
 
 Route::get('/product-details/{id}', [ProductController::class, 'getProductDetails'])->name('products.details');
+//////////////////////Bestelling plaatsen ///////////////////////////////////
+
+
+Route::post('/order', [OrderController::class, 'placeOrder'])->name('order.place');
+
+
+Route::get('/order/success', function () {
+    return view('BestellingGeplaatst');
+})->name('order.success');

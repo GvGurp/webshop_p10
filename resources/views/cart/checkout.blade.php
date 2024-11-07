@@ -3,7 +3,7 @@
 @section('content')
     <h1>Afrekenen</h1>
 
-    @if($cart)  <!-- Tabel voor de product informatie in de winkelmandje (Gaby) -->
+    @if($cart)  <!-- Tabel voor de productinformatie in het winkelmandje (Gaby) -->
         <table>
             <thead>
                 <tr>
@@ -25,7 +25,8 @@
 
         <h3>Totaal: €{{ number_format($totalPrice, 2) }}</h3> <!-- Totale prijs met twee decimalen laten zien (Gaby) --> 
 
-        <form action="/order" method="POST">
+        <!-- Hier begint het formulier voor de bestelling -->
+        <form action="{{ route('order.place') }}" method="POST">
             @csrf
 
             <!-- Adresgegevens invoeren (Gaby) -->
@@ -73,20 +74,22 @@
             </div>
 
             <!-- Checkbox voor akkoord betaling (Gaby) -->
-            <div style="margin-top: 20px;">
+            <div style="margin-block-start: 20px;">
                 <label for="terms">
                     <input type="checkbox" id="terms" name="terms" required>
                     Ik begrijp dat ik moet betalen zodra ik op "Bestelling plaatsen" klik.
                 </label>
             </div>
 
+            <input type="hidden" name="totalPrice" value="{{ $totalPrice }}">
+
+
             <!-- Bestelling plaatsen knop (Gaby) -->
-            <button type="submit" class="btn btn-success" style="margin-top: 10px;">Bestelling plaatsen</button>
-        </form>
+            <button type="submit" class="btn btn-success" style="margin-block-start: 10px;">Bestelling plaatsen</button>
+        </form> <!-- Correct afsluiten van het formulier -->
     @else 
-     <!-- Als de winkelmand leeg is (Gaby) -->
+        <!-- Als de winkelmand leeg is (Gaby) -->
         <p>Je winkelmandje is leeg.</p>
     @endif
 
-    
 @endsection
