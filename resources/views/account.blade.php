@@ -2,15 +2,15 @@
 
 @section('content')
 <main id="mainAccount">
-    
-        @if(session('success'))
-            <div class="alert alert-success">
-              {{ session('success') }}
-            </div>
-        @endif
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
+    <!-- Accountinformatie blok -->
     <div class="account-info">
-        <h1>My Account</h1>
+        <h1>Mijn Account</h1>
         <div class="info-block">
             <p><strong>Voornaam:</strong> {{ $user->firstname }}</p>
             <p><strong>Achternaam:</strong> {{ $user->lastname }}</p>
@@ -21,8 +21,8 @@
     </div>
 
     <!-- Bewerken formulier voor het wijzigen van gegevens -->
-    <div class="edit-info" style="display: none;"> <!-- Zorg ervoor dat het formulier niet zichtbaar is bij het laden -->
-        <h1>Edit Information</h1>
+    <div class="edit-info">
+        <h1>Gegevens bewerken</h1>
         <form id="changeInfoForm" action="{{ route('account.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -54,7 +54,7 @@
         const editButton = document.getElementById('editButton');
 
         // Wissel tussen de informatie en het bewerkingsformulier
-        if (editBlock.style.display === 'none') {
+        if (editBlock.style.display === 'none' || editBlock.style.display === '') {
             infoBlock.style.display = 'none'; // Verberg de info
             editBlock.style.display = 'block'; // Toon het bewerkingsformulier
             editButton.style.display = 'none'; // Verberg de bewerkknop
@@ -65,4 +65,5 @@
         }
     }
 </script>
+
 @endsection

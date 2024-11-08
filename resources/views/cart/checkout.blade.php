@@ -60,4 +60,5 @@
 
     <button type="submit">Bestelling plaatsen</button>
 </form>
+
 @endsection

@@ -1,83 +1,147 @@
 .webshop {
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
-}
-
-.producten {
-    display: block;
-    list-style-type: none;
-    color: black;
+    margin-block-start: 40px;
+    
 }
 
 .titel {
-    display: block;
-    font-size: 5em;
+    font-size: 3em;
     font-weight: bold;
-}
-
-.filters {
-    margin-left: 2em;
-}
-
-/* Voeg dit toe aan je CSS-bestand (bijv. in een apart .css bestand of inline) */
-.filter-container {
-    float: left;
-    width: 25%;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-}
-
-.product-list {
-    float: right;
-    width: 70%;
-    padding: 10px;
-}
-
-.filter-form {
+    text-align: start;
+    margin-block-start: 20px;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.filter-item {
-    margin-bottom: 15px;
+.webshop .titel h1 {
+    color: black;
 }
 
-.btn-primary {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-ul.producten {
-    list-style-type: none;
-    padding: 0;
-}
-
-ul.producten li {
-    margin-bottom: 20px;
-    border: 2px solid black;
-    padding: 1em;
-    border-radius: 1em;
-    max-width: 110%;
-}
-
-ul.producten img {
-    max-width: 100px;
-    height: auto;
+.winkelmandje-icon {
+    display: inline-block;
+    margin-inline-start: 20px;
 }
 
 .alles {
     display: flex;
-    gap: 10em;
-    padding-right: 30px;
+    gap: 30px;
+    justify-content: flex-start;
+}
+
+.filters {
+    inline-size: 10%;
+    margin-inline-start: 50px; 
+    padding: 20px;
+    background-color: rgb(255, 255, 255); 
+    max-block-size: 400px;
+    block-size: fit-content;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    margin-block-end: 20px;
+    block-size: auto;
+}
+
+.filters h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-block-end: 10px;
+}
+
+.filters label {
+    font-size: 1em;
+    color: white;
+    display: block;
+}
+
+.filters input[type="number"] {
+    inline-size: 100%;
+    padding: 5px;
+    margin-block-end: 15px;
+}
+
+.producten {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding-inline-start: 20px;
+    inline-size: 85%;
+}
+
+.producten li {
+    inline-size: 23%;
+    border: 2px solid black;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255); /* Lichtrode achtergrond voor de producten */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-info {
+    inline-size: 100%;
+    padding-inline-end: 10px;
+    text-align: center;
+}
+
+.product-info strong {
+    display: block;
+    margin-block-end: 5px;
+}
+
+.producten img {
+    max-inline-size: 120px;
+    block-size: auto;
+    object-fit: contain;
+}
+
+.producten hr {
+    margin-block-start: 10px;
+}
+
+.btn-primary {
+    background-color: #000; /* Zwarte achtergrond voor de knop */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-primary img {
+    vertical-align: middle;
+    margin-inline-end: 5px;
 }
 
 .filt {
-    border: solid 2px black;
-    border-radius: 2em;
+    border: 2px solid black;
+    border-radius: 10px;
     background-color: #f2f2f2;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .producten li {
+        inline-size: 48%;
+    }
+
+    .filters {
+        inline-size: 40%;
+    }
+}
+
+@media (max-width: 480px) {
+    .producten li {
+        inline-size: 100%;
+    }
+
+    .filters {
+        inline-size: 100%;
+    }
 }
