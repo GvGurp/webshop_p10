@@ -8,35 +8,30 @@
         <h1>Webshop</h1>
     </div>
     
-    <!-- Filter en winkelmandje linksboven -->
-    <div class="top-left">
-        @auth
-            <!-- Winkelmandje-icoon -->
-            <div class="winkelmandje-icon">
-                <a href="{{ route(name: 'cart.index') }}">
-                    <img src="{{ asset('foto\'s/cartIcoon.png') }}" alt="Winkelmandje" style="inline-size: 40px; block-size: 40px;">
-                </a>
-            </div>
-        @endauth
+    <!-- Winkelmandje-icoon -->
+<div class="winkelmandje-icon">
+    <a href="{{ route('cart.index') }}"> <!-- Verwijder "name:" -->
+        <img src="{{ asset('foto\'s/cartIcoon.png') }}" alt="Winkelmandje" style="inline-size: 40px; block-size: 40px;">
+    </a>
+</div>
 
-        <!-- Filter opties -->
-        <div class="filters">
-            <form method="GET" action="{{ route('cart.index') }}">
-                <h3>Categorieën</h3>
-                @foreach($categories as $category)
-                    <label>
-                        <input type="checkbox" name="category[]" value="{{ $category->id }}"
-                        {{ in_array($category->id, request('category', [])) ? 'checked' : '' }}>
-                        {{ $category->name }}
-                    </label><br>
-                @endforeach
+<!-- Filter formulier -->
+<div class="filters">
+    <form method="GET" action="{{ route('products.index') }}"> <!-- Zorg dat deze route gedefinieerd is -->
+        <h3>Categorieën</h3>
+        @foreach($categories as $category)
+            <label>
+                <input type="checkbox" name="category[]" value="{{ $category->id }}"
+                       {{ in_array($category->id, request('category', [])) ? 'checked' : '' }}>
+                {{ $category->name }}
+            </label><br>
+        @endforeach
 
-                <h3>Max Prijs</h3>
-                <input type="number" name="max_price" value="{{ request('max_price', 3000) }}" min="100" max="3000">
-                <button type="submit">Filteren</button>
-            </form>
-        </div>
-    </div>
+        <h3>Max Prijs</h3>
+        <input type="number" name="max_price" value="{{ request('max_price', 3000) }}" min="100" max="3000">
+        <button type="submit">Filteren</button>
+    </form>
+</div>
 
     <!-- Toon een melding als de gebruiker niet is ingelogd -->
     @guest
