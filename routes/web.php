@@ -11,7 +11,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminProductController;
 use App\Models\Category; 
 use faker\Factory;  
-use App\Http\Controllers\OrderController;
+
 
 ////////////////////////// Algemene routes //////////////////////////
 

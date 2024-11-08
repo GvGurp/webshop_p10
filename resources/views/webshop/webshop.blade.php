@@ -15,7 +15,6 @@
         <div class="filters">
             <form method="GET" action="{{ route('products.index') }}">
                 <h3>Categorieën</h3>
-                @if (isset($categories) && $categories->isNotEmpty())
                 @foreach($categories as $category)
                     <label>
                         <input type="checkbox" name="category[]" value="{{ $category->id }}"
