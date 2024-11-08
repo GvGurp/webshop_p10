@@ -9,7 +9,20 @@ class OrderController extends Controller
 {
     public function placeOrder(Request $request)
 {
-    // Minimaliseer de validatie en probeer alleen enkele velden op te slaan
+    // Validatie van het formulier(Gaby)
+    $request->validate([
+        'city' => 'required|string',
+        'street' => 'required|string',
+        'postcode' => 'required|string',
+        'house_number' => 'required|string',
+        'phone' => 'required|string',
+        'payment_method' => 'required|string',
+        'password' => 'required|string',
+        'terms' => 'accepted',
+        'totalPrice' => 'required|numeric' // Voeg validatie voor totalPrice toe(Gaby)
+    ]);
+
+    // Maak een nieuwe order aan en sla deze op in de database (Gaby)
     $order = Order::create([
         'city' => $request->city,
         'street' => $request->street,
@@ -17,7 +30,7 @@ class OrderController extends Controller
         'house_number' => $request->house_number,
         'phone' => $request->phone,
         'payment_method' => $request->payment_method,
-        'total_price' => $request->totalPrice,
+        'total_price' => $request->input('totalPrice'), // Haal totalPrice op uit het formulier(Gaby)
         'user_password' => bcrypt($request->password),
         'terms_accepted' => true,
     ]);
