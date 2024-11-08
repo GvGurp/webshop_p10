@@ -4,7 +4,7 @@
 <div class="container">
     <h1>Product Wijzigen</h1>
 
-    <form action="{{ route('adminUpdate', $product->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('adminEditForm', $product->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')  <!-- Dit zorgt ervoor dat het formulier een PUT-verzoek stuurt -->
 
@@ -43,8 +43,14 @@
             <label for="picture">Afbeelding</label>
             <input type="file" class="form-control" name="picture">
         </div>
-
-        <button type="submit" class="btn btn-primary">Product Bijwerken</button>
+        <form action="{{ route('adminUpdate', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <!-- Form fields here -->
+            <button type="submit" class="btn btn-primary">Update Product</button>
+        </form>
     </form>
+
+ 
 </div>
 @endsection

@@ -28,40 +28,40 @@ class AdminProductController extends Controller
     }
     
     public function update(Request $request, $id)
-    {
-        // Validatie van de invoer
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'category_id' => 'required|exists:categories,id',
-            'productInformation' => 'nullable|string',
-            'specifications' => 'nullable|string',
-            'picture' => 'nullable|image|max:2048' // Validatie voor de afbeelding
-        ]);
+{
+    // Validate and update the product logic
+    $product = Product::findOrFail($id);
 
-        // Haal het product op
-        $product = Product::findOrFail($id);
+    // Validation
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric',
+        'category_id' => 'required',
+        'productInformation' => 'nullable|string',
+        'specifications' => 'nullable|string',
+        'picture' => 'nullable|image|max:2048',
+    ]);
 
-        // Update de productinformatie
-        $product->name = $request->input('name');
-        $product->price = $request->input('price');
-        $product->category_id = $request->input('category_id');
-        $product->productInformation = $request->input('productInformation');
-        $product->specifications = $request->input('specifications');
+    // Update the product fields
+    $product->name = $request->input('name');
+    $product->price = $request->input('price');
+    $product->category_id = $request->input('category_id');
+    $product->productInformation = $request->input('productInformation');
+    $product->specifications = $request->input('specifications');
 
-        // Verwerk de afbeelding indien deze is geüpload
-        if ($request->hasFile('picture')) {
-            // Verwijder de oude afbeelding als deze bestaat
-            if ($product->picture) {
-                Storage::disk('public')->delete($product->picture);
-            }
-            $imagePath = $request->file('picture')->store('products', 'public');
-            $product->picture = $imagePath;
+    // Handle image upload if present
+    if ($request->hasFile('picture')) {
+        if ($product->picture) {
+            Storage::disk('public')->delete($product->picture); // Delete old image
         }
-
-        // Sla de wijzigingen op in de database
-        $product->save();
-
-        return redirect()->route('admin.Bewerken')->with('success', 'Product succesvol bijgewerkt.');
+        $imagePath = $request->file('picture')->store('products', 'public');
+        $product->picture = $imagePath;
     }
+
+    // Save the updated product
+    $product->save();
+
+    // Redirect back with success message
+    return redirect()->route('adminEditForm', ['id' => $product->id])->with('success', 'Product updated successfully!');
+}
 }

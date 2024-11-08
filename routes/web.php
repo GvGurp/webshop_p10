@@ -36,9 +36,7 @@ Route::middleware('auth')->group(function () {
 Route::view('/bezorgdiensten', 'bezorgdiensten')->name('bezorgdiensten');  
 
 
-
 /////////////////////// Webshop routes ///////////////////////////
-
 // Webshop overzicht met filters (Gaby)
 Route::get('/webshop', [ProductController::class, 'index'])->name('cart.webshop');
 Route::get('/adminBewerken', [AdminProductController::class, 'index'])->name('adminBewerken');
@@ -63,12 +61,13 @@ Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.
 // Update product (Ola)
 
 Route::get('/webshop/adminBewerken/{id}', [AdminProductController::class, 'edit'])->name('adminEditForm');
-Route::put('webshop/adminUpdate/{id}', [AdminProductController::class, 'update'])->name('adminUpdate');
+Route::put('/webshop/adminBewerken/{id}', [AdminProductController::class, 'update'])->name('adminUpdate');
+
 
 
 
 // Delete product (Gaby)
-Route::get('/webshop', [ProductController::class, 'index'])->name('webshop');
+//Route::get('/webshop', [ProductController::class, 'index'])->name('webshop');
 Route::get('/products/{id}/delete-confirmation', [ProductController::class, 'showDeleteConfirmation'])->name('products.showDeleteConfirmation');
 Route::delete('/products/{id}/confirm-delete', [ProductController::class, 'confirmDelete'])->name('products.confirmDelete');
 
@@ -106,9 +105,7 @@ Route::get('/order/success', function () {
 })->name('order.success');
 
 //////////////// Admin bestellingen overzicht /////////////////////
-// Toon het overzicht van bestellingen
 Route::get('/adminOverzicht', [AdminOrderController::class, 'index'])->name('adminOverzicht');
-// Toon de details van een specifieke bestelling
 Route::get('/adminOverzicht/{id}', [AdminOrderController::class, 'show'])->name('adminOrderDetails');
 
 Route::get('/search', [ProductSearchController::class, 'search'])->name('product.search');

@@ -7,27 +7,14 @@
     <div class="titel">
         <h1>Webshop</h1>
     </div>
-    <form action="{{ route('product.search') }}" method="GET">
+    <form id="search-form" action="{{ route('product.search') }}" method="GET">
         <input type="text" name="query" placeholder="Zoek naar producten..." value="{{ request('query') }}" required>
         <button type="submit">Zoeken</button>
     </form>
     
-    <!-- Zoekresultaten (alleen tonen als er resultaten zijn) -->
-    @if(isset($products) && $products->isNotEmpty())
-        <div class="products">
-            @foreach($products as $product)
-                <div class="product">
-                    <img src="{{ asset('storage/' . $product->picture) }}" alt="{{ $product->name }}">
-                    <h3>{{ $product->name }}</h3>
-                    <p>{{ $product->productInformation }}</p>
-                    <p>{{ $product->specifications }}</p>
-                    <p>Prijs: €{{ number_format($product->price, 2, ',', '.') }}</p>
-                </div>
-            @endforeach
-        </div>
-    @elseif(isset($products))
-        <p>Geen producten gevonden.</p>
-    @endif
+    <!-- Div voor dynamische zoekresultaten -->
+    <div id="search-results"></div>
+    
     
     <!-- Filter en winkelmandje linksboven -->
     <div class="top-left">
@@ -44,6 +31,7 @@
         <div class="filters">
             <form method="GET" action="{{ route('cart.index') }}">
                 <h3>Categorieën</h3>
+                @if (isset($categories) && $categories->isNotEmpty())
                 @foreach($categories as $category)
                     <label>
                         <input type="checkbox" name="category[]" value="{{ $category->id }}"
@@ -51,6 +39,7 @@
                         {{ $category->name }}
                     </label><br>
                 @endforeach
+                @endif
 
                 <h3>Max Prijs</h3>
                 <input type="number" name="max_price" value="{{ request('max_price', 3000) }}" min="100" max="3000">

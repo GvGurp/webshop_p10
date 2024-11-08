@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-   
     // Haal alle producten op, met filters voor categorie en prijs
     public function index(Request $request)
     {

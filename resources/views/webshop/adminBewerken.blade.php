@@ -16,6 +16,7 @@
 
             <!-- Verwijder product -->
             <form action="{{ route('products.showDeleteConfirmation', $product->id) }}" method="GET" style="display:inline;">
+                
                 @csrf
                 <button type="submit" class="btn btn-danger">Verwijder Product</button>
             </form>
