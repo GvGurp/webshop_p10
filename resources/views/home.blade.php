@@ -1,29 +1,30 @@
 @extends('layout.layout')
 
-
 @section('content')
-
-<input type="text" id="search" placeholder="Zoek naar producten...">
-<div id="search-results" style="position: relative;"></div>
-
-<!-- Modal voor productdetails -->
-<div id="product-modal" style="display: none;">
-    <div id="modal-content">
-        <span id="close-modal">&times;</span>
-        <h2 id="product-name"></h2>
-        <p id="product-description"></p>
-        <p>Prijs: <span id="product-price"></span></p>
-    </div>
-</div>
 <main id="mainhome">
-<div id="hometext">
+    <div id="hometext" class="content-container">
+        <!-- Logo afbeelding en tekst -->
+        <img src="{{ asset('foto\'s/cropped-logo UNEED-IT(notext).png') }}" alt="De logo van UNEED-IT">
+        <h1>Voor al uw reparaties kunt u terecht bij <span class="highlighted">Uneed</span><span class="highlighted2"> - it</span></h1>
+    </div>
 
+    <!-- Zoekbalk -->
+    <div class="search-container">
+        <input type="text" id="search" class="search-input" placeholder="Zoek naar producten...">
+        <div id="search-results" class="search-results"></div>
+    </div>
 
-     <img src="{{ asset('foto\'s/cropped-logo UNEED-IT(notext).png') }}" alt="De logo van UNEED-IT">
-  
-    <p><span class="white-text">voor al uw reparaties kunt u terecht bij </span><span class="red-text">Uneed-</span><span  class="blue-text">it</span></p>
-</div>
+    <!-- Modal voor productdetails -->
+    <div id="product-modal" class="modal" style="display: none;">
+        <div id="modal-content" class="modal-content">
+            <span id="close-modal" class="close-modal">&times;</span>
+            <h2 id="product-name" class="modal-title"></h2>
+            <p id="product-description" class="modal-description"></p>
+            <p>Prijs: <span id="product-price" class="modal-price"></span></p>
+        </div>
+    </div>
 </main>
+
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -52,8 +53,6 @@ $(document).ready(function() {
             $('#search-results').html(''); // Wis de resultaten als de zoekbalk leeg is
         }
     });
-});
-
 
     // Klik event voor de zoekresultaten
     $(document).on('click', '.result-item', function() {

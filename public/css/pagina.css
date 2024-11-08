@@ -1,546 +1,353 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: white; /* Achtergrond van de body blijft wit */
-}
-
-.container {
-    max-inline-size: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-#mainOverOns {
-    padding-block-start: 120px;
-    padding-block-end: 120px;
-    min-block-size: 100vh;
+/* CSS voor Algemeen Layout */
+#mainContentWrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-image: url("Photos/uneedi01.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    text-align: center;
+    align-items: flex-start;
+    min-block-size: 100vh;
+    inline-size: 1000px;
+    padding: 40px 20px;
+    padding-block-end: 300px;
+    margin-block-end: 1000px;
     box-sizing: border-box;
-    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-.ootext {
-    background-color: rgba(51, 51, 51, 0.7);
-    inline-size: 50%;
-    padding: 20px 40px;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    border: 2px solid red;
-    margin-block-start: 30px;
-    margin-block-end: 30px;
-}
-
-.ootext p {
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-.red-text {
-    color: white; /* Verander tekstkleur naar wit */
-    font-size: 35px;
-    font-weight: bold;
-    background-color: rgba(51, 51, 51, 0.7);
-    padding: 10px;
-    margin-block-start: 30px;
-    border-radius: 20px;
-    border: 2px solid red;
-    inline-size: 60%;
+/* Container voor de Content */
+.content-container {
+    background-color: #333;
+    padding: 30px;
+    border-radius: 12px;
+    max-inline-size: 700px;
+    min-inline-size: fit-content;
+    margin-block-end: 1000px;
+    text-align: center;
+    box-shadow: 0 4px 10px 5px rgba(255, 0, 0, 0.6);
+    margin-block-start: 100px;
     margin-block-end: 40px;
 }
 
-.red-text p {
-    margin: 0;
-    padding: 0 10px;
-}
-
-.titel h1 {
-    font-size: 40px;
-    color: #fff; /* Hoofdtitel wit maken */
-    margin-block-end: 20px;
-}
-
-ul.producten {
-    list-style-type: none;
-    padding: 0;
-}
-
-ul.producten li {
-    margin-block-end: 20px;
-}
-
-ul.producten li strong {
-    color: #fff; /* Productnamen wit maken */
-}
-
-ul.producten img {
-    max-inline-size: 100px;
-    margin-block-start: 10px;
-}
-
-ul.producten a {
-    display: inline-block;
-    margin-block-start: 10px;
-    padding: 10px 20px;
-    color: white;
-    background-color: #f39d12d7;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-ul.producten a.btn-danger {
-    background-color: #e74c3c;
-}
-
-form {
-    background-color: black;  /* Achtergrond van het formulier zwart */
-    padding: 20px;
-    border-radius: 10px;
-    color: white;  /* Tekst in formulier wit */
-}
-
-form label {
-    font-size: 16px;
-    margin-block-end: 5px;
-    display: block;
-}
-
-form input[type="text"],
-form input[type="date"],
-form select,
-form textarea,
-form input[type="file"] {
-    inline-size: 100%;
-    inline-size: fit-content;
-    inline-size: 300px;
-    padding: 10px;
-    margin-block-end: 15px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #333; /* Achtergrond inputvelden zwart maken */
-    color: white; /* Tekst in inputvelden wit */
-}
-
-form input[type="submit"] {
-    background-color: #3498db;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-form input[type="submit"]:hover {
-    background-color: #2980b9;
-}
-
-#search {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-block-end: 20px;
-    inline-size: 100%;
-}
-
-#search-results {
-    margin-block-start: 20px;
-}
-
-.result-item {
-    background-color: #f0f0f0;
-    padding: 10px;
-    margin: 5px 0;
-    cursor: pointer;
-}
-
-.result-item:hover {
-    background-color: #ddd;
-}
-
-#product-modal {
-    position: fixed;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    inset-inline-end: 0;
-    inset-block-end: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-#modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    inline-size: 400px;
-    text-align: center;
-}
-
-#modal-content h2 {
-    font-size: 24px;
-}
-
-#close-modal {
-    position: absolute;
-    inset-block-start: 10px;
-    inset-inline-end: 10px;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-@media (max-width: 768px) {
-    #mainOverOns {
-        padding-block-start: 100px;
-        padding-block-end: 100px;
-    }
-
-    .ootext {
-        inline-size: 70%;
-    }
-
-    .red-text {
-        font-size: 28px;
-        inline-size: 80%;
-    }
-
-    form input[type="text"],
-    form input[type="date"],
-    form select,
-    form textarea {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    #mainOverOns {
-        padding-block-start: 80px;
-        padding-block-end: 80px;
-    }
-
-    .ootext {
-        inline-size: 90%;
-    }
-
-    .red-text {
-        font-size: 24px;
-        inline-size: 100%;
-    }
-
-    form input[type="text"],
-    form input[type="date"],
-    form select,
-    form textarea {
-        font-size: 14px;
-    }
-
-    form input[type="submit"] {
-        font-size: 14px;
-    }
-}
-
-/* Zorg ervoor dat de container de juiste padding en uitlijning heeft */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-    margin-block-start: 20px;
-}
-
-/* Hoofdtitel styling */
-.bezorg-header h1 {
-    font-size: 36px;
-    color: #333;
-    text-align: center;
-}
-
-.textbezorg {
-    font-size: 18px;
-    color: #555;
-    text-align: center;
-    margin: 10px 0;
-}
-
-/* Styling voor de lijst met bezorgdiensten */
-.bezorg-opties {
-    margin-block-start: 20px;
-}
-
-.bezorg-lijst {
-    list-style: none;
-    padding: 0;
-    text-align: center;
-}
-
-.bezorg-lijst li {
-    margin: 10px 0;
-}
-
-/* Styling voor de knoppen */
-.bezorgdiensten {
-    background-color: #4CAF50; /* Groene achtergrondkleur */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.bezorgdiensten:hover {
-    background-color: #45a049; /* Donkere groene hoverkleur */
-}
-
-/* Resultaat tekst styling */
-.resultaat {
-    margin-block-start: 20px;
-    font-size: 18px;
-    color: #333;
+/* Stijl voor de Titel */
+.content-header h1 {
+    color: #fff;
+    font-size: 2.5rem;
     font-weight: bold;
-    text-align: center;
-}
-
-.faq-container {
-    max-inline-size: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.question {
-    background-color: #ff5733; /* Rood voor de vraag */
-    color: white;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-}
-
-.question:hover {
-    background-color: #e64a19; /* Donkerder rood bij hover */
-}
-
-.answer {
-    display: none; /* Antwoorden standaard verbergen */
-    padding: 10px;
     margin-block-end: 20px;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    font-size: 16px;
-    color: #333;
 }
 
-.answer.show {
-    display: block; /* Laat het antwoord zien wanneer de 'show' class wordt toegevoegd */
+/* Opmaak voor de Content */
+.content-body p {
+    color: #f5f5f5;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-block-end: 15px;
 }
 
-.faq-container .question + .answer {
+/* Service-secties voor meerdere items */
+.service-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-block-start: 20px;
+
+}
+
+/* Flexbox-indeling voor Service-item */
+.service-item {
+    display: flex;
+    background-color: #444;
+    padding: 20px;
+    border-radius: 10px;
+    inline-size: calc(33% - 20px);
+    margin: 10px;
+    box-shadow: 0 4px 4px rgba(255, 0, 0, 0.6);
+    color: #f5f5f5;
+    text-align: start;
+    margin: 10px;
+    inline-size: 700px;
+    align-items: center;
+}
+
+.over-ons-text{
+    color: white;
+}
+/* Specifieke stijl voor de afbeelding */
+.service-item img {
+    inline-size: 80px; /* Stel gewenste breedte in */
+    block-size: 80px;
+    border-radius: 8px;
+    margin-inline-end: 15px;
+}
+
+/* Stijl voor de tekst in Service-item */
+.service-text h2 {
+    font-size: 1.8rem;
+    color: #fff;
+    margin: 0;
+    
+}
+
+.service-text p {
+    font-size: 1rem;
+    line-height: 1.4;
     margin-block-start: 5px;
 }
 
-.edit-info {
+/* Media-query voor responsieve weergave op kleinere schermen */
+@media (max-width: 768px) {
+    .service-item {
+        inline-size: 100%;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .service-item img {
+        margin-inline-end: 0;
+        margin-block-end: 10px;
+    }
+}
+
+/* Specifieke stijl voor highlight */
+.highlighted {
+    color: #ff0000;
+}
+
+.highlighted2 {
+    color: turquoise;
+}
+
+/* CSS voor de FAQ-pagina */
+
+/* Algemene styling voor de content-container */
+#mainFaq .content-container {
+    padding: 20px;
+    background-color: #333; /* Donkergrijze achtergrond voor de container */
+}
+
+/* Styling voor de titel */
+#mainFaq .content-header h1 {
+    color: #fff; /* Witte kleur voor de titel */
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-block-end: 20px;
+}
+
+/* Styling voor de body van de FAQ sectie */
+#mainFaq .content-body {
+    font-family: Arial, sans-serif;
+}
+
+/* Vragen vetgedrukt, wit en 5px groter dan de standaard tekst */
+#mainFaq .question {
+    color: #fff; /* Witte kleur voor de vragen */
+    font-weight: bold; /* Vetgedrukt */
+    font-size: 1.2rem; /* 5px groter dan de standaard tekst */
+    cursor: pointer;
+    margin-block-end: 10px;
+}
+
+/* Antwoorden in de FAQ */
+#mainFaq .answer {
+    color: #fff; /* Witte kleur voor de antwoorden */
+    font-size: 1rem;
+    margin-inline-start: 20px;
     display: none;
 }
 
-html, body {
-    block-size: 100%;    /* Zorgt ervoor dat de body de volledige hoogte van het scherm vult */
-    margin: 0;       /* Verwijdert de standaardmarge */
-    padding: 0;      /* Verwijdert de standaardpadding */
-    overflow-x: hidden; /* Verhindert horizontaal scrollen */
+/* Wanneer een antwoord wordt weergegeven */
+#mainFaq .answer.show {
+    display: block;
 }
 
-#mainAccount {
-    min-block-size: 100vh;   /* Zorgt ervoor dat de container altijd ten minste de hoogte van het scherm heeft */
-    padding-block-end: 20px; /* Voegt wat ruimte toe aan de onderkant van de pagina */
+/* Styling voor de vraag als er hover effect nodig is */
+#mainFaq .question:hover {
+    color: #ff5c5c; /* Verander de kleur als de vraag wordt aangeklikt */
 }
 
-/* Zorg ervoor dat html en body de volledige hoogte van het scherm vullen */
-html, body {
-    block-size: 100%; /* Zorgt ervoor dat de body de volledige hoogte van het scherm vult */
-    margin: 0;    /* Verwijdert de standaardmarge */
-    padding: 0;   /* Verwijdert de standaardpadding */
-    overflow-x: hidden; /* Verhindert horizontaal scrollen */
-}
-
-/* Zorg ervoor dat de pagina kan scrollen wanneer de inhoud groter is dan het scherm */
-#mainOverOns {
-    padding-block-start: 120px;
-    padding-block-end: 120px;
-    min-block-size: 100vh;  /* Zorgt ervoor dat dit element altijd ten minste de hoogte van het scherm heeft */
+#mainBezorgdiensten {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    background-image: url("Photos/uneedi01.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    text-align: center;
+    min-block-size: 100vh; /* Zorgt ervoor dat het main element de volledige hoogte van het scherm gebruikt */
+    padding-block-end: 300px; /* Voeg wat padding toe om te voorkomen dat inhoud direct onderaan komt */
+}
+
+/* Verzeker je dat de container goed binnen de viewport valt */
+.content-container {
+    flex-grow: 1; /* Laat de container de resterende ruimte innemen */
+    padding: 30px;
     box-sizing: border-box;
-    overflow-y: auto; /* Zorgt ervoor dat er een verticale scrollbalk verschijnt als de inhoud groter is dan het scherm */
 }
 
-/* Hoofdcontainer voor account- of andere pagina's */
-#mainAccount {
-    min-block-size: 100vh; /* Zorgt ervoor dat het element altijd de hoogte van het scherm heeft */
-    padding-block-end: 20px; /* Voegt wat ruimte toe aan de onderkant van de pagina */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-/* Als je wilt dat de container altijd minimaal 100vh hoog is, zorg dan dat het contentgedeelte niet kleiner is dan het scherm */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
+/* Zorg ervoor dat de result-sectie ook kan uitbreiden als dat nodig is */
+#result {
     margin-block-start: 20px;
-    min-block-size: 100vh; /* Zorg ervoor dat de container altijd de volledige hoogte van het scherm heeft */
+    padding-block-start: 20px;
+    color: #f5f5f5;
 }
 
-.Graphic-Design,
-.Graphic-Design1 {
-    border: 1px solid black; /* Zwarte rand rondom de dienst */
-    padding: 10px; /* Zorgt voor wat ruimte binnen de box */
-    border-radius: 5px; /* Optioneel: afronden van de hoeken voor een zachtere uitstraling */
-    margin: 10px; /* Voeg ruimte toe tussen de diensten */
-    background-color: white; /* Zorg ervoor dat de achtergrond van de diensten donker blijft */
-    color: black; /* Zwarte tekstkleur verandert naar wit binnen de dienstbox */
-    margin-block-end: 100px;
+/* Zorg ervoor dat de container zich uitstrekt over de volledige hoogte van het scherm */
+#mainRequest {
+    min-block-size: 100vh; /* Zorg ervoor dat de container minimaal de hoogte van het scherm inneemt */
+    display: flex;
+    flex-direction: column; /* Zorg ervoor dat de inhoud netjes onder elkaar komt */
+    padding-block-end: 300px;
 }
 
-/* Verwijder de onderlijning van alle a tags */
-a {
-    text-decoration: none; /* Verwijdert de onderlijn van de links */
-    background: none; /* Verwijdert de achtergrondkleur van de links */
-    color: inherit; /* Zorgt ervoor dat de tekstkleur van de link overgenomen wordt van de omringende tekst */
+/* Voeg extra ruimte toe aan de onderkant van de pagina zodat de gebruiker kan scrollen */
+#mainRequest .content-container {
+    padding-block-end: 40px;
+    padding: 70px 70px ; /* Zorg voor extra ruimte aan de onderkant van de container */
 }
 
-/* Verwijder de onderlijning en achtergrondkleur voor knoppen */
-button {
-    background: none; /* Verwijdert de achtergrondkleur van knoppen */
-    border: none; /* Verwijdert de rand rondom de knop */
-    color: inherit; /* Zorgt ervoor dat de knop dezelfde kleur heeft als de omringende tekst */
-    cursor: pointer; /* Geeft een pointer aan de gebruiker wanneer ze over de knop bewegen */
+/* Zorg ervoor dat de form elementen zich goed schalen */
+#mainRequest form {
+    flex: 1; /* Zorg ervoor dat het formulier uitstrekt over de beschikbare ruimte */
 }
 
-/* Specifieke styling voor de knoppen die worden gebruikt voor acties in de winkelwagen */
-.btn {
-    background-color: #3498db; /* Blauwe achtergrondkleur */
-    color: white; /* Witte tekstkleur */
-    padding: 10px 20px; /* Ruimte binnen de knop */
-    border-radius: 5px; /* Afronden van de hoeken van de knop */
-    text-align: center; /* Centreer de tekst in de knop */
+/* Voor de alertberichten kun je de padding iets kleiner maken als ze te veel ruimte innemen */
+.alert {
+    margin-block-end: 20px;
+    padding: 12px;
 }
 
-.btn:hover {
-    background-color: #2980b9; /* Donkerder blauwe kleur bij hover */
+/* Zorg ervoor dat de accountinformatie blokken goed uitgelijnd zijn */
+#mainAccount .account-info {
+    background-color: #333;
+    padding: 30px;
+    border-radius: 12px;
+    color: #fff;
+    box-shadow: 0 4px 10px 5px rgba(255, 0, 0, 0.6);
+    margin-block-end: 30px;
+    margin-block-start: 30px;
 }
 
-/* Specifieke styling voor de tabel (optioneel) */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+/* Styling voor de informatieblokken */
+#mainAccount .info-block p {
+    margin-block-end: 10px;
+    font-size: 1.1rem;
 }
 
-table th, table td {
+/* De bewerkknop goed stylen */
+#mainAccount #editButton {
+    margin-block-start: 20px;
+    background-color: mediumturquoise;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+#mainAccount #editButton:hover {
+    background-color: #ff5c5c; /* Verander de kleur bij hover */
+}
+
+/* Bewerken formulier moet goed geconfigureerd worden */
+#mainAccount .edit-info {
+    display: none; /* Begin met verbergen van de edit-sectie */
+    background-color: #333;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px 5px rgba(255, 0, 0, 0.6);
+    color: #fff;
+    margin-block-end: 300px;
+}
+
+/* Styling voor het formulier */
+#mainAccount .edit-info input[type="text"],
+#mainAccount .edit-info input[type="email"],
+#mainAccount .edit-info input[type="password"] {
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #777;
     padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
+    inline-size: 100%;
+    margin-block-end: 15px;
+    border-radius: 8px;
 }
 
-table th {
-    background-color: #f4f4f4;
+/* Knoppen in het bewerkingsformulier */
+#mainAccount .button-group button {
+    padding: 10px 15px;
+    margin-block-start: 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    inline-size: 48%;
+    color: white;
 }
 
-form input[type="number"] {
-    text-align: center;
-    width: 50px;
-    padding: 5px;
+#mainAccount .button-group button[type="submit"] {
+    background-color: mediumturquoise;
 }
 
-form button {
-    padding: 5px 10px;
-    margin-top: 5px;
-    background-color: #2980b9; /* Kleur voor de werkknoppen */
+#mainAccount .button-group button[type="button"] {
+    background-color: red;
+}
+
+#mainAccount .button-group button:hover {
+    opacity: 0.8;
+}
+
+#mainhome {
+    min-block-size: 100vh; /* Zorg ervoor dat de maincontainer minimaal de hoogte van het scherm heeft */
+    padding-block-end: 150px; /* Optioneel: voeg wat extra ruimte toe onderaan */
+}
+
+/* Zorg ervoor dat de container niet te groot is en dat je naar beneden kunt scrollen */
+.container {
+    max-block-size: 350px; /* Maximale hoogte van de container */
+    overflow-y: auto; /* Zorg ervoor dat er een scrollbalk verschijnt als de inhoud groter is dan de container */
+    padding: 20px;
+}
+
+/* Scrollbaar gebied voor de formulieren */
+.form-scroll {
+    max-block-size: 350px; /* Maak het formulier scrollbaar binnen een vaste hoogte */
+    overflow-y: auto;
+    margin-block-end: 20px; /* Ruimte tussen de formulieren */
+}
+
+/* Styling voor de submit button */
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #ff0000; /* Rood voor de knop */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-form button:hover {
-    background-color: #1f6fae; /* Donkerder bij hover */
+input[type="submit"]:hover {
+    background-color: #cc0000;
 }
 
-/* Zorg ervoor dat de body en html de volledige hoogte van het scherm vullen */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+.filters {
+    color: #000; /* Stelt de standaard tekstkleur in voor de hele filters-sectie */
 }
 
-/* Zorg ervoor dat de container de volledige hoogte van de pagina heeft */
-form {
-    min-height: 100%;
-    
-    padding-bottom: 20px; /* Voegt een beetje ruimte toe aan de onderkant van het formulier */
-    box-sizing: border-box; /* Zorgt ervoor dat padding de hoogte niet beïnvloedt */
+.filters h3,
+.filters label,
+.filters input,
+.filters button {
+    color: #000 !important; /* Zorgt ervoor dat tekst in specifieke elementen zwart wordt */
 }
 
-/* Zorg ervoor dat het formulier een beetje ruimte tussen de elementen heeft */
-form div {
-    margin-bottom: 50px;
+.filters input[type="checkbox"],
+.filters input[type="number"] {
+    color: #000; /* Zorgt ervoor dat de tekst in invoervelden zwart is */
 }
 
-/* Zorg ervoor dat de knoppen goed gestyled zijn */
-button {
-    background-color: #3498db; /* Blauwe achtergrondkleur */
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%; /* Zorgt ervoor dat de knop de volledige breedte inneemt */
-}
-
-button:hover {
-    background-color: #2980b9; /* Donkere blauwe kleur bij hover */
-}
-
-/* Geef wat ruimte tussen de secties */
-h4 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-/* Zorg ervoor dat de invoervelden goed worden uitgelijnd */
-input[type="text"],
-input[type="tel"],
-input[type="password"],
-select {
-    width: 100%; /* Zorg ervoor dat de invoervelden de volledige breedte innemen */
+.filters button {
+    background-color: #f9f9f9; /* Voor een licht contrast, kun je deze aanpassen naar wens */
+    color: #000;
+    border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.filters button:hover {
+    background-color: #e0e0e0; /* Optionele hover-kleur voor de knop */
 }

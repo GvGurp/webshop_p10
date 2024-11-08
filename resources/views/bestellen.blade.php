@@ -1,86 +1,69 @@
 @extends('layout.layout')
 
-
 @section('content')
-<div class="container">
-    <h1>Omschrijf zo duidelijk mogelijk het defect:</h1>
-    <form action="submit_request.php" method="post" enctype="multipart/form-data">
-        <label for="defect">Omschrijving:</label><br>
-        <textarea id="defect" name="defect" rows="6" cols="50" required></textarea><br>
+    <!-- Link naar de externe CSS -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-        <label for="machine">Type machine:</label><br>
-        <select id="machine" name="machine" required>
-            <option value="Niet gespecificeerd">Niet gespecificeerd</option>
-            <option value="Apple">Apple</option>
-            <option value="Computer">Computer</option>
-            <option value="Tablet">Tablet</option>
-            <option value="Laptop">Laptop</option>
-            <option value="Smartphone">Smartphone</option>
-            <option value="Tarieven computer">Tarieven computer</option>
-            <option value="Tarieven Apple">Tarieven Apple</option>
-        </select><br>
+    <div class="form-container order-page">
+        <div class="form-scroll">
+            <form action="{{ route('order.place') }}" method="POST">
+                @csrf
 
-        <label for="garantie">Garantie:</label><br>
-        <select id="garantie" name="garantie" required>
-            <option value="ja">Ja</option>
-            <option value="nee">Nee</option>
+                <!-- Adresgegevens invoeren -->
+                <h4>Vul je adres in</h4>
+                <div>
+                    <label for="city">Stad</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                <div>
+                    <label for="street">Straatnaam</label>
+                    <input type="text" id="street" name="street" required>
+                </div>
+                <div>
+                    <label for="postcode">Postcode</label>
+                    <input type="text" id="postcode" name="postcode" required>
+                </div>
+                <div>
+                    <label for="house_number">Huisnummer</label>
+                    <input type="text" id="house_number" name="house_number" required>
+                </div>
 
-        </select><br>
+                <!-- Telefoonnummer -->
+                <div>
+                    <label for="phone">Telefoonnummer</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
 
-        <label for="datum">Datum:</label><br>
-        <input type="date" id="datum" name="datum" required><br>
+                <!-- Wachtwoord bevestiging invoeren -->
+                <h4>Bevestig je wachtwoord</h4>
+                <div>
+                    <label for="password">Wachtwoord</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
 
-        <label for="photo">Foto (optioneel):</label><br>
-        <input type="file" id="photo" name="photo"><br>
+                <!-- Betaalmethode kiezen via dropdown -->
+                <h4>Kies een betaalmethode</h4>
+                <div>
+                    <label for="payment_method">Betaalmethode</label>
+                    <select id="payment_method" name="payment_method" required>
+                        <option value="ideal">iDeal</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="creditcard">Creditcard</option>
+                        <option value="bancontact">Bancontact</option>
+                    </select>
+                </div>
 
-        <input type="hidden" name="idvanklant" value="<?php echo $idvanklant; ?>">
-        <input type="hidden" name="Naam" value="<?php echo $_SESSION['user']['naam']; ?>">
-        <input type="hidden" name="email" value="<?php echo $_SESSION['user']['email']; ?>">
-        <input type="hidden" name="password" value="<?php echo $_SESSION['user']['password']; ?>">
+                <!-- Checkbox voor akkoord betaling -->
+                <div style="margin-block-start: 20px;">
+                    <label for="terms">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        Ik begrijp dat ik moet betalen zodra ik op "Bestelling plaatsen" klik.
+                    </label>
+                </div>
+                <input type="hidden" name="totalPrice" value="{{ $totalPrice }}">
 
-
-        <input type="submit" value="Verzenden">
-
-    </form>
-</div><div class="container">
-    <h1>Omschrijf zo duidelijk mogelijk het defect:</h1>
-    <form action="submit_request.php" method="post" enctype="multipart/form-data">
-        <label for="defect">Omschrijving:</label><br>
-        <textarea id="defect" name="defect" rows="6" cols="50" required></textarea><br>
-
-        <label for="machine">Type machine:</label><br>
-        <select id="machine" name="machine" required>
-            <option value="Niet gespecificeerd">Niet gespecificeerd</option>
-            <option value="Apple">Apple</option>
-            <option value="Computer">Computer</option>
-            <option value="Tablet">Tablet</option>
-            <option value="Laptop">Laptop</option>
-            <option value="Smartphone">Smartphone</option>
-            <option value="Tarieven computer">Tarieven computer</option>
-            <option value="Tarieven Apple">Tarieven Apple</option>
-        </select><br>
-
-        <label for="garantie">Garantie:</label><br>
-        <select id="garantie" name="garantie" required>
-            <option value="ja">Ja</option>
-            <option value="nee">Nee</option>
-
-        </select><br>
-
-        <label for="datum">Datum:</label><br>
-        <input type="date" id="datum" name="datum" required><br>
-
-        <label for="photo">Foto (optioneel):</label><br>
-        <input type="file" id="photo" name="photo"><br>
-
-        <input type="hidden" name="idvanklant" value="<?php echo $idvanklant; ?>">
-        <input type="hidden" name="Naam" value="<?php echo $_SESSION['user']['naam']; ?>">
-        <input type="hidden" name="email" value="<?php echo $_SESSION['user']['email']; ?>">
-        <input type="hidden" name="password" value="<?php echo $_SESSION['user']['password']; ?>">
-
-
-        <input type="submit" value="Verzenden">
-
-    </form>
-</div>
+                <button type="submit">Bestelling plaatsen</button>
+            </form>
+        </div>
+    </div>
 @endsection

@@ -1,134 +1,243 @@
-
-#logonav img {
-    height: 80px;
-    width: auto;
+/* Algemene opmaak voor het formulier */
+#mainRequest .content-container {
+    background-color: #333; /* Donkere achtergrond voor de container */
+    padding: 30px;
+    border-radius: 12px;
+    max-inline-size: 700px;
+    text-align: start;
+    color: #f5f5f5; /* Witte tekstkleur */
+    box-shadow: 0 4px 10px 5px rgba(255, 0, 0, 0.6);
 }
 
-#logoptions ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+/* Styling voor de titel van het formulier */
+#mainRequest .content-title {
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-block-end: 20px;
 }
 
-#logoptions ul li {
-    display: inline;
-    margin-right: 20px;
+/* Opmaak voor de formuliervragen */
+#mainRequest .form-group {
+    margin-block-end: 20px; /* Ruimte tussen de vragen */
 }
 
-#logoptions ul li:last-child {
-    margin-right: 15;
+/* Styling voor de labels van de formuliervragen */
+#mainRequest .form-label {
+    color: #fff; /* Witte kleur voor de labels */
+    font-weight: bold; /* Vetgedrukte tekst */
+    font-size: 1.2rem; /* Vergroot de tekst voor de labels */
+    display: block;
+    margin-block-end: 8px; /* Ruimte tussen label en invoerveld */
 }
 
-#logoptions ul li a {
-    text-decoration: none;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+/* Opmaak voor de invoervelden */
+#mainRequest .form-input {
+    inline-size: 100%; /* Zorgt ervoor dat de invoervelden de volledige breedte gebruiken */
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #444; /* Donkere achtergrond voor invoervelden */
+    color: #fff; /* Witte tekst in de invoervelden */
+}
+
+/* Styling voor de submit-knop */
+#mainRequest .submit-button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #ff0000; /* Rood voor de knop */
+    color: #fff; /* Witte tekst */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-block-start: 20px;
+    transition: background-color 0.3s;
+    text-decoration: none; /* Zorg ervoor dat er geen onderlijn is */
+}
+
+/* Hover-effect voor de submit-knop */
+#mainRequest .submit-button:hover {
+    background-color: #cc0000; /* Donkerder rood bij hover */
+}
+
+/* Styling voor de alertberichten */
+.alert {
+    padding: 15px;
+    margin-block-end: 20px;
+    border-radius: 5px;
     color: #fff;
 }
 
-#logoptions ul li a:hover {
-    color: #ffd700;
+/* Specifieke styling voor succesberichten */
+.alert-success {
+    background-color: #4CAF50; /* Groene achtergrond voor succes */
+}
+
+/* Specifieke styling voor foutmeldingen */
+.alert-danger {
+    background-color: #f44336; /* Rode achtergrond voor fouten */
 }
 
 
-#logoptions ul li.redc a {
-    color: red;
-}
-#logoptions ul li.bluec a {
-    color: mediumturquoise;
-}
-#logoptions ul li a:hover {
-    color: #ffd700;
-}
-
-.login-signup {
-    margin-top: 100px;
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+/* Specifieke styling voor de pagina's */
+.order-page .form-container,
+.request-form-page .form-container {
+    max-height: 350px; /* Maximale hoogte van de container */
+    overflow-y: auto; /* Voeg verticale scrollbalk toe */
+    padding: 20px; /* Ruimte rondom het formulier */
+    background-color: #f9f9f9; /* Achtergrondkleur voor het formulier */
+    border-radius: 10px; /* Afronden van de hoeken */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Schaduw rondom het formulier */
 }
 
-.login-signup h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
+/* Styling voor de form elementen op deze specifieke pagina */
+.order-page form,
+.request-form-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Ruimte tussen de form elementen */
 }
 
-.login-signup button {
-    padding: 10px 20px;
+.order-page h4,
+.request-form-page h4 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Stijl de labels en invoervelden voor de specifieke pagina's */
+.order-page label,
+.request-form-page label {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.order-page input[type="text"],
+.request-form-page input[type="text"],
+.order-page input[type="tel"],
+.request-form-page input[type="tel"],
+.order-page input[type="password"],
+.request-form-page input[type="password"],
+.order-page select,
+.request-form-page select {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.order-page input[type="checkbox"],
+.request-form-page input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Styling voor de submit knop */
+.order-page button[type="submit"],
+.request-form-page button[type="submit"] {
+    padding: 12px 20px;
+    background-color: #ff0000; /* Rood voor de knop */
+    color: white;
     border: none;
     border-radius: 5px;
-    background-color: #4CAF50;
-    color: white;
-    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-top: 10px;
 }
 
-.login-signup button:hover {
-    background-color: #45a049;
-    color: white;
+.order-page button[type="submit"]:hover,
+.request-form-page button[type="submit"]:hover {
+    background-color: #cc0000;
 }
 
-.login-signup button + button {
-    margin-left: 10px;
-}
-
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /*min-height: 100vh;*/
-}
+/* Container voor het formulier */
 .form-container {
-    width: 300px;
-    margin: auto;
-    margin-top: 20vh;
-    background-color: #f2f2f2;
+    max-width: 600px; /* Beperk de breedte van de container */
+    margin: 0 auto; /* Centraal uitlijnen */
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    height: auto; /* Zorg ervoor dat de container zijn hoogte aanpast aan de inhoud */
+    min-height: 100vh; /* Zorg ervoor dat de container minimaal het volledige schermhoogte heeft */
+    box-sizing: border-box; /* Houd rekening met padding en borders in de hoogte en breedte */
+    overflow: auto; /* Zorg ervoor dat de container kan scrollen als de inhoud te groot is */
 }
 
-.form-container label {
-    margin-bottom: 5px;
-    display: block;
+/* Titelstijl voor de form-secties */
+.form-container h4 {
+    margin-bottom: 10px;
+    font-size: 20px;
 }
 
-.form-container input[type="text"],
-.form-container input[type="email"],
-.form-container input[type="password"],
-.form-container button[type="submit"] {
+/* Afstand tussen formulierdivs */
+.form-container form div {
+    margin-bottom: 15px;
+}
+/* Algemene pagina-instellingen */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto; /* Dwingt scrollen af */
+}
+
+/* Formulier container */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 50px;
+    padding-bottom: 500px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow-y: auto; /* Schakelt scrollen in voor de form-container */
+}
+
+/* Scroll-instelling binnen formulier */
+.form-scroll {
+    max-height: calc(100vh - 80px); /* Houdt rekening met form-container padding */
+    overflow-y: auto;
+}
+
+/* Titels in het formulier */
+.form-container h4 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+/* Afstand tussen de inputvelden */
+.form-container form div {
+    margin-bottom: 15px;
+}
+
+/* Labels */
+.form-container form label {
+    font-weight: bold;
+}
+
+/* Input- en selectelementen */
+.form-container form input,
+.form-container form select {
     width: 100%;
     padding: 10px;
-    margin: 5px 0;
+    margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box;
 }
 
-.form-container button[type="submit"] {
-    background-color: #4CAF50;
+/* Knopstijl */
+.form-container form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
     color: white;
     border: none;
-    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
-.form-container button[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-.form-title {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.login-header {
-    text-align: center;
-    margin-bottom: 20px;
+.form-container form button:hover {
+    background-color: #0056b3;
 }

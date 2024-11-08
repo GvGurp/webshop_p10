@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="webshop">
-    <!-- Titel en winkelmandje icoon -->
     <div class="titel">
         <h1>Webshop</h1>
         <div class="winkelmandje-icon">
@@ -12,9 +11,7 @@
         </div>
     </div>
 
-    <!-- Alles container met filters aan de linkerzijde en producten aan de rechterzijde -->
     <div class="alles">
-        <!-- Filters sectie -->
         <div class="filters">
             <form method="GET" action="{{ route('products.index') }}">
                 <h3>Categorieën</h3>
@@ -31,7 +28,6 @@
             </form>
         </div>
 
-        <!-- Producten sectie -->
         <div class="producten">
             @foreach($products as $product)
                 <li>
@@ -49,7 +45,6 @@
                         @endif
                     </div>
 
-                    <!-- Winkelmandje knop -->
                     @auth
                         <form action="{{ route('cart.add', $product->id) }}" method="POST">
                             @csrf

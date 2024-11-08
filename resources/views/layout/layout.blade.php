@@ -26,7 +26,6 @@
             @auth
                 @if (Auth::user()->email === 'uneedit-admin@gmail.com')
                    <li class="redc"> <a href="webshop/admincreate">admin create</a> </li>
-                   <li class="redc"> <a href="{{ route('adminBewerken', ['id' => 1]) }}">admin bewerken</a> </li> <!-- Pas de ID aan naar de gewenste waarde -->
                 @endif
           @endauth
 
