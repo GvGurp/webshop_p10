@@ -73,6 +73,8 @@ Route::post('adminCreate', function () {
     ]);
     return redirect('webshop');
 })->name('adminCreate');
+Route::get('/webshop/admincreate', [AdminOrderController::class, 'create'])->name('admin.create');
+
 
 Route::get('/webshop/adminBewerken/{id}', [AdminProductController::class, 'edit'])->name('adminEditForm');
 Route::put('/webshop/adminBewerken/{id}', [AdminProductController::class, 'update'])->name('adminUpdate');
@@ -143,3 +145,4 @@ Route::get('/adminOverzicht/{id}', [AdminOrderController::class, 'show'])->name(
 
 Route::get('/search', [ProductSearchController::class, 'search'])->name('product.search');
 
+Route::get('/search-product', [ProductController::class, 'search'])->name('search.product');
