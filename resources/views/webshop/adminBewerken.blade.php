@@ -1,42 +1,26 @@
 @extends('layout.layout')
 
 @section('content')
-<div class="admin-webshop">
-    <div class="titel"><h1>Producten Beheren</h1></div>
+<div class="container">
+    <h1>Beheer Producten</h1>
 
-    <ul class="producten">
-        @foreach($products as $product)
+    <!-- Lijst van alle producten -->
+    @foreach($products as $product)
+        <div class="product">
+            <h2>{{ $product->name }}</h2>
+            <p>Prijs: €{{ $product->price }}</p>
+            <p>{{ $product->productInformation }}</p>
 
-            <li>
-                <strong>{{ $product->name }}</strong><br>
-                <strong>Prijs:</strong> €{{ $product->price }}<br>
-                <p><strong>Informatie:</strong> {{ $product->productInformation }}</p>
-                <p><strong>Specificaties:</strong> {{ $product->specifications }}</p>
+            <!-- Wijzig product knop (link naar bewerkpagina) -->
+            <a href="{{ route('adminEditForm', $product->id) }}" class="btn btn-warning">Wijzig Product</a>
 
-                @if($product->picture)
-                    <img src="{{ asset('storage/' . $product->picture) }}" alt="{{ $product->name }}" style="max-inline-size: 100px;">
-                @else
-                    <p>Geen afbeelding</p>
-                @endif
-
-                <!-- Knop om product te wijzigen -->
-                <a href="{{ route('adminBewerken', $product->id) }}" class="btn btn-warning">
-                    Wijzig Product
-                </a>
-
-                <!-- Knop om product te verwijderen -->
-                @auth
-                    
-                        @csrf
-                
-                        <a href="{{ route('products.showDeleteConfirmation', $product->id) }}" class="btn btn-danger">
-                            Verwijder Product
-                        </a>
-                    </form>
-                @endauth
-            </li>
-            <hr>
-        @endforeach
-    </ul>
+            <!-- Verwijder product -->
+            <form action="{{ route('products.showDeleteConfirmation', $product->id) }}" method="GET" style="display:inline;">
+                @csrf
+                <button type="submit" class="btn btn-danger">Verwijder Product</button>
+            </form>
+        </div>
+        <hr>
+    @endforeach
 </div>
 @endsection

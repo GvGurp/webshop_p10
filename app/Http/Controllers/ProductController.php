@@ -8,39 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    public function show($id)
-    {
-    $product = Product::findOrFail($id);
-    return response()->json($product);
-    }
-
-    public function destroy($id)
-{
-    $product = Product::findOrFail($id);
-    $product->delete();
-
-    return redirect()->route('adminBewerken', ['id' => $id])->with('success', 'Product succesvol verwijderd!');
-}
-
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-
-        // Zoek naar producten die overeenkomen met de query
-        $products = Product::where('name', 'LIKE', "%{$query}%")->get();
-
-        return response()->json($products);
-    }
-
-    public function getProductDetails($id){
-        // Haal het product op met het gegeven ID of geef een 404-fout terug
-        $product = Product::findOrFail($id);
-        
-        // Geef het product als JSON terug
-        return response()->json($product);
-        }
-
-        
+   
     // Haal alle producten op, met filters voor categorie en prijs
     public function index(Request $request)
     {
@@ -64,62 +32,6 @@ class ProductController extends Controller
 
         return view('webshop.webshop', compact('products', 'categories'));
     }
-
-
-
-
-
-    public function edit($id)
-{
-    $product = Product::find($id);
-
-    if (!$product) {
-        return redirect()->route('some.route')->with('error', 'Product niet gevonden');
-    }
-
-    return view('webshop.adminBewerken', compact('product'));
-}
-
-
-
-public function update(Request $request, $id)
-{
-    // Validatie van de invoer
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'price' => 'required|numeric',
-        'category_id' => 'required|exists:categories,id',
-        'productInformation' => 'nullable|string',
-        'specifications' => 'nullable|string',
-        'picture' => 'nullable|image|max:2048' // Validatie voor de afbeelding
-    ]);
-
-    // Haal het product op
-    $product = Product::findOrFail($id);
-
-    // Update de productinformatie
-    $product->name = $request->input('name');
-    $product->price = $request->input('price');
-    $product->category_id = $request->input('category_id');
-    $product->productInformation = $request->input('productInformation');
-    $product->specifications = $request->input('specifications');
-
-    // Verwerk de afbeelding indien deze is geüpload
-    if ($request->hasFile('picture')) {
-        // Verwijder de oude afbeelding als deze bestaat
-        if ($product->picture) {
-            Storage::disk('public')->delete($product->picture);
-        }
-        $imagePath = $request->file('picture')->store('products', 'public');
-        $product->picture = $imagePath;
-    }
-
-    // Sla de wijzigingen op in de database
-    $product->save();
-
-    return redirect()->route('admin.products.index')->with('success', 'Product succesvol bijgewerkt.');
-}
-
 
     public function showDeleteConfirmation($id)
     {

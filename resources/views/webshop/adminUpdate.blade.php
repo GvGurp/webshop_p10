@@ -1,43 +1,50 @@
 @extends('layout.layout')
 
 @section('content')
-<div class="edit-product">
-    <h1>Wijzig Product: {{ $product->name }}</h1>
+<div class="container">
+    <h1>Product Wijzigen</h1>
 
     <form action="{{ route('adminUpdate', $product->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
+        @method('PUT')  <!-- Dit zorgt ervoor dat het formulier een PUT-verzoek stuurt -->
 
-        <label>Productnaam:</label>
-        <input type="text" name="name" value="{{ $product->name }}" required><br>
+        <div class="form-group">
+            <label for="name">Product Naam</label>
+            <input type="text" class="form-control" name="name" value="{{ old('name', $product->name) }}" required>
+        </div>
 
-        <label>Prijs:</label>
-        <input type="number" name="price" value="{{ $product->price }}" step="0.01" required><br>
+        <div class="form-group">
+            <label for="price">Prijs</label>
+            <input type="text" class="form-control" name="price" value="{{ old('price', $product->price) }}" required>
+        </div>
 
-        <label>Categorie:</label>
-        <select name="category_id" required>
-            @foreach($categories as $category)
-                <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
-                    {{ $category->name }}
-                </option>
-            @endforeach
-        </select><br>
+        <div class="form-group">
+            <label for="category_id">Categorie</label>
+            <select class="form-control" name="category_id" required>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
 
-        <label>Productinformatie:</label>
-        <textarea name="productInformation">{{ $product->productInformation }}</textarea><br>
+        <div class="form-group">
+            <label for="productInformation">Productinformatie</label>
+            <textarea class="form-control" name="productInformation">{{ old('productInformation', $product->productInformation) }}</textarea>
+        </div>
 
-        <label>Specificaties:</label>
-        <textarea name="specifications">{{ $product->specifications }}</textarea><br>
+        <div class="form-group">
+            <label for="specifications">Specificaties</label>
+            <textarea class="form-control" name="specifications">{{ old('specifications', $product->specifications) }}</textarea>
+        </div>
 
-        <label>Afbeelding:</label>
-        @if($product->picture)
-            <img src="{{ asset('storage/' . $product->picture) }}" alt="{{ $product->name }}" style="max-width: 100px;"><br>
-        @endif
-        <input type="file" name="picture"><br><br>
+        <div class="form-group">
+            <label for="picture">Afbeelding</label>
+            <input type="file" class="form-control" name="picture">
+        </div>
 
-        <button type="submit" class="btn btn-primary">Opslaan</button>
+        <button type="submit" class="btn btn-primary">Product Bijwerken</button>
     </form>
-
-    <a href="{{ route('admin.products.index') }}" class="btn btn-secondary">Terug naar productenlijst</a>
 </div>
 @endsection

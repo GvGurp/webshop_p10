@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory;
+   use HasFactory;
    protected $table = 'category';
    public $timestamps = false;  // Geen timestamps in deze tabel
 

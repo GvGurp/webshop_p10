@@ -5,7 +5,10 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\ProductSearchController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminProductController;
 use App\Models\Category; 
 use faker\Factory;  
 
@@ -32,14 +35,13 @@ Route::middleware('auth')->group(function () {
 });
 Route::view('/bezorgdiensten', 'bezorgdiensten')->name('bezorgdiensten');  
 
-Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
-Route::get('/search', [ProductController::class, 'search'])->name('search.product');
+
 
 /////////////////////// Webshop routes ///////////////////////////
 
 // Webshop overzicht met filters (Gaby)
 Route::get('/webshop', [ProductController::class, 'index'])->name('cart.webshop');
-Route::get('/adminBewerken', [ProductController::class, 'index'])->name('adminBewerken');
+Route::get('/adminBewerken', [AdminProductController::class, 'index'])->name('adminBewerken');
 
 /////////////////////////////////////////////////////CRUD///////////////////////////////////////////////////////////////////
 
@@ -60,10 +62,8 @@ Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.
 
 // Update product (Ola)
 
-Route::put('/adminUpdate/{id}', [ProductController::class, 'update'])->name('adminUpdate');
-Route::delete('products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-//Route::get('webshop/adminBewerken/', [ProductController::class, 'edit'])->name('adminBewerken');
-
+Route::get('/webshop/adminBewerken/{id}', [AdminProductController::class, 'edit'])->name('adminEditForm');
+Route::put('webshop/adminUpdate/{id}', [AdminProductController::class, 'update'])->name('adminUpdate');
 
 
 
@@ -76,13 +76,6 @@ Route::delete('/products/{id}/confirm-delete', [ProductController::class, 'confi
 
 // Winkelmandje alleen beschikbaar voor ingelogde gebruikers (Gaby)
 Route::middleware('auth')->group(function () {
-
-    
-
-
-
-
-
     Route::get('/webshop', [CartController::class, 'webshop'])->name('cart.webshop');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
@@ -101,7 +94,8 @@ Route::get('/webshop/admincreate', function () {
 Auth::routes();
 
 Route::get('/product-details/{id}', [ProductController::class, 'getProductDetails'])->name('products.details');
-//////////////////////Bestelling plaatsen ///////////////////////////////////
+
+///////////////////////////Bestelling plaatsen ///////////////////////////////////
 
 
 Route::post('/order', [OrderController::class, 'placeOrder'])->name('order.place');
@@ -110,3 +104,12 @@ Route::post('/order', [OrderController::class, 'placeOrder'])->name('order.place
 Route::get('/order/success', function () {
     return view('BestellingGeplaatst');
 })->name('order.success');
+
+//////////////// Admin bestellingen overzicht /////////////////////
+// Toon het overzicht van bestellingen
+Route::get('/adminOverzicht', [AdminOrderController::class, 'index'])->name('adminOverzicht');
+// Toon de details van een specifieke bestelling
+Route::get('/adminOverzicht/{id}', [AdminOrderController::class, 'show'])->name('adminOrderDetails');
+
+Route::get('/search', [ProductSearchController::class, 'search'])->name('product.search');
+

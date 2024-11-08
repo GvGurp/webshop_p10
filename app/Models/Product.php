@@ -29,7 +29,6 @@ class Product extends Model
     //Relatie van product op catergory (Gaby)
     public function category()
     {
-        return $this->belongsTo(Category::class);
+    return $this->belongsTo(Category::class, 'category_id');
     }
-
 }
