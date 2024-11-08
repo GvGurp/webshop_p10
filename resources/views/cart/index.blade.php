@@ -47,7 +47,8 @@
         </table>
 
         <h3>Totaal: €{{ number_format($totalPrice, 2) }}</h3> <!-- De totale prijs met twee decimalen tonen (Gaby) --> 
-        <a href="{{ route('cart.checkout') }}" class="btn btn-primary">Afrekenen</a> <!-- Naar de checkout kunnen gaan (Gaby) -->
-        <a class="btn btn-primary" href="{{ route('cart.webshop') }}">Verder winkelen</a> 
+<a href="{{ route('cart.checkout') }}" class="btn btn-primary">Afrekenen</a> <!-- Naar de checkout kunnen gaan (Gaby) -->
+<a class="btn btn-primary" href="{{ route('cart.webshop') }}">Verder winkelen</a>
+
     @endif
 @endsection

@@ -75,6 +75,48 @@
     </nav>
     
     
+<nav id="navbar">
+    <div id="logonav">
+        <img src="{{ asset('foto\'s/cropped-logo%20UNEED-IT.png') }}" alt="De logo van UNEED-IT">
+    </div>
+    <div id="logoptions">
+        <ul>
+            <li class="redc"> <a href="home">Home</a> </li>
+            <li class="bluec"> <a href="overOns">Over ons </a></li>
+            <li class="redc"> <a href="service">Service </a></li>
+            <li class="bluec" > <a href="zakelijk">Zakelijk </a></li>
+            <li class="redc"><a href="{{ route('requests.index') }}">Verzoeken</a></li>
+            <li class="bluec"> <a href="faq">Faq </a> </li>
+            <li class="redc"><a href="bezorgdiensten"> Bezorgdiensten </a></li>
+            <li class="bluec"> <a href="account">Account </a> </li>
+            <li class="bluec"><a href="webshop"> webshop  </a> </li>
+
+            @auth
+                @if (Auth::user()->email === 'uneedit-admin@gmail.com')
+                   <li class="redc"> <a href="webshop/admincreate">admin create</a> </li>
+                @endif
+          @endauth
+
+            @guest
+                <li class="bluec"><a href="{{ route('login') }}">Inloggen</a></li>
+                <li class="redc"><a href="{{ route('register') }}">Registreren</a></li>
+            @endguest
+
+            @auth
+                <li class="bluec">
+                    <a href="{{ route('logout') }}" 
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Uitloggen
+                    </a>
+                </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            @endauth
+        </ul>
+    </div>
+</nav>
+
     <!-- Inhoud dat op de pagina komt te staan (Gaby) -->
     <div class="">
         @yield ('content')
