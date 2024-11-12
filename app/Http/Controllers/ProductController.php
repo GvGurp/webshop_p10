@@ -11,6 +11,12 @@ class ProductController extends Controller
     // Haal alle producten op, met filters voor categorie en prijs
     public function index(Request $request)
     {
+       
+        $products = Product::all(); // Adjust this to apply any filters you want
+        $categories = Category::all(); // Retrieve all categories
+
+        return view('webshop.webshop', compact('products', 'categories'));
+    
         $query = Product::query();
 
         // Filteren op categorie

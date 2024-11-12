@@ -3,15 +3,6 @@
 @section('content')
 <div class="container">
     <h1>Beheer Producten</h1>
-
-    <form id="search-form" action="{{ route('product.search') }}" method="GET">
-        <input type="text" name="query" placeholder="Zoek naar producten..." value="{{ request('query') }}" required>
-        <button type="submit">Zoeken</button>
-    </form>
-    
-    <!-- Div voor dynamische zoekresultaten -->
-    <div id="search-results"></div>
-
     <!-- Lijst van alle producten -->
     @foreach($products as $product)
         <div class="product">

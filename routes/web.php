@@ -6,7 +6,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminOrderController;
-use App\Http\Controllers\AdminProductSearchController;
 use App\Http\Controllers\ProductSearchController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminProductController;
@@ -88,7 +87,6 @@ Route::put('/webshop/adminBewerken/{id}', [AdminProductController::class, 'updat
 // Product bewerken en verwijderen
 Route::put('/adminUpdate/{id}', [ProductController::class, 'update'])->name('adminUpdate');
 Route::delete('products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-Route::get('/webshop', [ProductController::class, 'index'])->name('webshop');
 Route::get('/products/{id}/delete-confirmation', [ProductController::class, 'showDeleteConfirmation'])->name('products.showDeleteConfirmation');
 Route::delete('/products/{id}/confirm-delete', [ProductController::class, 'confirmDelete'])->name('products.confirmDelete');
 
@@ -146,6 +144,5 @@ Route::get('/adminOverzicht', [AdminOrderController::class, 'index'])->name('adm
 Route::get('/adminOverzicht/{id}', [AdminOrderController::class, 'show'])->name('adminOrderDetails');
 
 Route::get('/search', [ProductSearchController::class, 'search'])->name('product.search');
-Route::get('/search', [AdminProductSearchController::class, 'search'])->name('product.search');
 
 Route::get('/search-product', [ProductController::class, 'search'])->name('search.product');

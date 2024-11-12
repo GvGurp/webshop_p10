@@ -4,6 +4,15 @@
 <div class="webshop">
     <div class="titel">
         <h1>Webshop</h1>
+
+        <form id="search-form" action="{{ route('product.search') }}" method="GET">
+            <input type="text" name="query" placeholder="Zoek naar producten..." value="{{ request('query') }}" required>
+            <button type="submit">Zoeken</button>
+        </form>
+        
+        <!-- Div voor dynamische zoekresultaten -->
+        <div id="search-results"></div>
+        
         <div class="winkelmandje-icon">
             <a href="{{ route('cart.index') }}">
                 <img src="{{ asset('foto\'s/cartIcoon.png') }}" alt="Winkelmandje" style="inline-size: 40px; block-size: 40px;">

@@ -1,5 +1,4 @@
-
-<!--@if($products->isNotEmpty())
+@if($products->isNotEmpty())
     <div class="products">
         @foreach($products as $product)
             <div class="product">
@@ -13,4 +12,4 @@
     </div>
 @else
     <p>Geen producten gevonden.</p>
-@endif-->
+@endif
